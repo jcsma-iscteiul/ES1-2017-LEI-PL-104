@@ -14,6 +14,11 @@ public class RandomConfig {
 	
 	String path = "";
 
+	/***
+	 * This class is used to choose the path to rules.cf file and set random weight to each rule.
+	 * 
+	 * @author atmgo-iscteiul
+	 */
 	public RandomConfig() {
 		JFileChooser chooser = new JFileChooser();
 		FileNameExtensionFilter filter = new FileNameExtensionFilter(
@@ -32,11 +37,17 @@ public class RandomConfig {
 	}
 
 	//Generate a number from -5 to 5
-	public int generateRandom(int min, int max) {
+	private int generateRandom(int min, int max) {
 		Random random = new Random();
 		return random.nextInt((max-min)+1)-5;
 	}
 
+	/***
+	 * Write to rules.cf each rule with the random weight.
+	 * 
+	 * @param path
+	 * @throws FileNotFoundException
+	 */
 	//Adds random weights to each of the rules in rules.cf file
 	public void writeToFile(String path) throws FileNotFoundException {
 		String fileToOutput = "";
