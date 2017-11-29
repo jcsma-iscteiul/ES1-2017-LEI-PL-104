@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
+import javax.management.InstanceAlreadyExistsException;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -32,12 +33,21 @@ public class Gui {
 	private JTextField log2Path;
 	private JButton log2Button;
 	private JButton next;
-
+	private String rulesPath;
+	private String spamPath;
+	private String hamPath;
+	public static final Gui INSTANCE = new Gui() ;
+	
+	public static Gui getInstance() {
+		return Gui.INSTANCE;
+	}
+	
 
 	/***
-	 * Builds a new GUI
+	 * Builds a new GUI´
+	 * @author rccms-iscteiul
 	 */
-	public Gui () {
+	private Gui () {
 		pathWindow();
 	}
 
@@ -94,10 +104,10 @@ public class Gui {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				String a = new FileChooser().buildFileChooser("*.cf", "cf");
-				if(a.contains("rules.cf")) {
+				rulesPath = new FileChooser("*.cf", "cf").buildFileChooser();
+				if(rulesPath.contains("rules.cf")) {
 					cfPath.setForeground(Color.black);
-					cfPath.setText(a);
+					cfPath.setText(rulesPath);
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "Wrong file. Try again.");
@@ -109,10 +119,10 @@ public class Gui {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String a = new FileChooser().buildFileChooser("*.log", "log");
-				if(a.contains("spam.log")) {
+				spamPath = new FileChooser("*.log", "log").buildFileChooser();
+				if(spamPath.contains("spam.log")) {
 					log1Path.setForeground(Color.black);
-					log1Path.setText(a);
+					log1Path.setText(spamPath);
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "Wrong file. Try again.");
@@ -124,10 +134,10 @@ public class Gui {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String a = new FileChooser().buildFileChooser("*.log", "log");
-				if(a.contains("ham.log")) {
+				hamPath = new FileChooser("*.log", "log").buildFileChooser();
+				if(hamPath.contains("ham.log")) {
 					log2Path.setForeground(Color.black);
-					log2Path.setText(a);
+					log2Path.setText(hamPath);
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "Wrong file. Try again.");
@@ -167,8 +177,23 @@ public class Gui {
 		frame.setLocation(x, y);
 	}
 
+	
+	public String getRulesPath() {
+		return rulesPath;
+	}
+
+
+	public String getSpamPath() {
+		return spamPath;
+	}
+
+
+	public String getHamPath() {
+		return hamPath;
+	}
+
 	public static void main(String[] args) {
-		new Gui();
+		Gui.getInstance();
 	}
 
 }

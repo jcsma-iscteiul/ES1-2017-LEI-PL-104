@@ -21,7 +21,10 @@ public class ConfigurationWindow {
 	private JButton EDIT;
 
 
-
+	/***
+	 * Builds a configuration window with two buttons to choose between Generate Random Configuration and Edit the file rules.cf.
+	 * @author rccms-iscteiul
+	 */
 	public ConfigurationWindow() {
 		buildWindow();
 	}
@@ -38,12 +41,25 @@ public class ConfigurationWindow {
 		window.add(GRC);
 		window.add(EDIT);
 		window.setVisible(true);
-		
-		EDIT.addActionListener(new ActionListener() {
-			
+
+
+		GRC.addActionListener(new ActionListener() {
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
+				String path = Gui.getInstance().getRulesPath();
+				new RandomConfig(path);
+
+
+			}
+		});
+
+		EDIT.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
 				JFrame f = new JFrame();
 				center(f);
 				f.setSize(300, 60);
@@ -51,29 +67,29 @@ public class ConfigurationWindow {
 				ArrayList<String> list;
 
 				File file = new File("C:\\Users\\HP\\Desktop\\rules.cf");
-								
+
 				try{
 					Scanner s = new Scanner(file);
-					 list = new ArrayList<String>();
+					list = new ArrayList<String>();
 					while (s.hasNext()){
 						list.add(s.next());
 					}
 					s.close();
-					
+
 					comboBox.setModel(new DefaultComboBoxModel<>(list.toArray()));
-					
-					
+
+
 					System.out.println(list);
 				}
 				catch (Exception exc) {
-					
+
 				}
-				
+
 				f.add(comboBox);
 				f.setVisible(true);;
 			}
 		});
-		
+
 	}
 
 
