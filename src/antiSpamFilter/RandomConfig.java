@@ -4,12 +4,14 @@ package antiSpamFilter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
 public class RandomConfig {
 
-	String path = "";
+	private String path = "";
+	private ArrayList<Rule> rules;
 
 	/***
 	 * This class is used to apply a random config to the file rules.cf.
@@ -19,8 +21,10 @@ public class RandomConfig {
 	 * @author atmgo-iscteiul
 	 */
 	public RandomConfig(String path) {
+		this.rules = new ArrayList<Rule>();
 		this.path = path;
-		applyRandomConfig();
+		addRandomWeight();
+		writeConfig(rules);
 	}
 
 	/***
@@ -29,20 +33,35 @@ public class RandomConfig {
 	 * @param min value
 	 * @param max value
 	 */
-	//Generate a number from -5 to 5
 	private int generateRandom(int min, int max) {
 		Random random = new Random();
 		return random.nextInt((max-min)+1)-5;
 	}
 
 	/***
-	 * Write to rules.cf each rule with the random weight.
+	 * Writes the rules with random weight to rules.cf.
 	 * 
-	 * @param path
+	 * @param rules Array with weight rules
 	 */
-	//Adds random weights to each of the rules in rules.cf file
-	public void applyRandomConfig(){
-		String fileToOutput = "";
+	private void writeConfig(ArrayList<Rule> rules) {
+		PrintWriter writer;
+		try {
+			writer = new PrintWriter(path);
+			for(Rule r : rules) {
+				writer.print(r);
+			}
+			writer.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	/***
+	 * Match each rule with respective random weight
+	 * 
+	 */
+	private void addRandomWeight(){
 		Scanner s;
 		try {
 			s = new Scanner(new File(path));
@@ -50,17 +69,22 @@ public class RandomConfig {
 				String l = s.nextLine();
 				l = l.split(" ")[0];
 				int weight = generateRandom(-5, 5);
-				l = l + " " + weight + "\n";
-				fileToOutput = fileToOutput + l;
+				rules.add(new Rule(l,weight));
 			}
 			s.close();
-			PrintWriter writer = new PrintWriter(path);
-			writer.print(fileToOutput);
-			writer.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	/***
+	 * Get the list of rules and respective weights after the random configuration as been applied.
+	 * 
+	 * @return
+	 */
+	public ArrayList<Rule> getRuleMap() {
+		return rules;
 	}
 
 }

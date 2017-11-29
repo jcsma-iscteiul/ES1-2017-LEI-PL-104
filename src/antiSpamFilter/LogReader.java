@@ -33,6 +33,7 @@ public class LogReader {
 			for(int i = 1;i<line.length;i++) {
 				rules[i-1] = line[i];
 			}
+			
 		}
 	}
 

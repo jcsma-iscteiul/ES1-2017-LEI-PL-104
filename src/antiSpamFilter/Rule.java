@@ -27,7 +27,6 @@ public class Rule {
 		return rule;
 	}
 	
-	
 	/***
 	 * Returns the weight of the rule.
 	 * 
@@ -38,7 +37,7 @@ public class Rule {
 	
 	@Override
 	public String toString() {
-		return rule + " " + weight;
+		return rule + " " + weight + "\n";
 	}
 
 }
