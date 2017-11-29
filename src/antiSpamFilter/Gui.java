@@ -21,6 +21,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Gui {
 
+	
 	private JFrame frame;
 	private JPanel cfPanel;
 	private JPanel log1Panel;

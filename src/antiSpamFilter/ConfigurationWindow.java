@@ -25,6 +25,7 @@ public class ConfigurationWindow {
 	 * Builds a configuration window with two buttons to choose between Generate Random Configuration and Edit the file rules.cf.
 	 * @author rccms-iscteiul
 	 */
+	
 	public ConfigurationWindow() {
 		buildWindow();
 	}

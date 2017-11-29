@@ -9,6 +9,7 @@ public class FileChooser {
 	private String a;
 	private String b;
 	private String cf;
+	
 	/***
 	 * This class is used to build a JFileChooser with filter for files. 
 	 * It returns the path to the selected file.
