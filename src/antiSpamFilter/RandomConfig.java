@@ -7,35 +7,28 @@ import java.io.PrintWriter;
 import java.util.Random;
 import java.util.Scanner;
 
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
 public class RandomConfig {
-	
+
 	String path = "";
 
 	/***
-	 * This class is used to choose the path to rules.cf file and set random weight to each rule.
+	 * This class is used to apply a random config to the file rules.cf.
+	 * 
+	 * @param path Path to the file rules.cf
 	 * 
 	 * @author atmgo-iscteiul
 	 */
-	public RandomConfig() {
-		JFileChooser chooser = new JFileChooser();
-		FileNameExtensionFilter filter = new FileNameExtensionFilter(
-				".cf Files Only", "cf");
-		chooser.setFileFilter(filter);
-		int returnVal = chooser.showOpenDialog(chooser);
-		//escolher o caminho para o rules.cf
-		if(returnVal == JFileChooser.APPROVE_OPTION) {
-			path = chooser.getSelectedFile().getAbsolutePath();
-		}
-	}
-	
-	//devolve o caminho para o rules.cf
-	public String getPath() {
-		return path;
+	public RandomConfig(String path) {
+		this.path = path;
+		applyRandomConfig();
 	}
 
+	/***
+	 * Generate a random number from min to max.
+	 * 
+	 * @param min value
+	 * @param max value
+	 */
 	//Generate a number from -5 to 5
 	private int generateRandom(int min, int max) {
 		Random random = new Random();
@@ -46,28 +39,28 @@ public class RandomConfig {
 	 * Write to rules.cf each rule with the random weight.
 	 * 
 	 * @param path
-	 * @throws FileNotFoundException
 	 */
 	//Adds random weights to each of the rules in rules.cf file
-	public void writeToFile(String path) throws FileNotFoundException {
+	public void applyRandomConfig(){
 		String fileToOutput = "";
-		Scanner s = new Scanner(new File(path));
-		while(s.hasNextLine()) {
-			String l = s.nextLine();
-			l = l.split(" ")[0];
-			int weight = generateRandom(-5, 5);
-			l = l + " " + weight + "\n";
-			fileToOutput = fileToOutput + l;
+		Scanner s;
+		try {
+			s = new Scanner(new File(path));
+			while(s.hasNextLine()) {
+				String l = s.nextLine();
+				l = l.split(" ")[0];
+				int weight = generateRandom(-5, 5);
+				l = l + " " + weight + "\n";
+				fileToOutput = fileToOutput + l;
+			}
+			s.close();
+			PrintWriter writer = new PrintWriter(path);
+			writer.print(fileToOutput);
+			writer.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		s.close();
-		PrintWriter writer = new PrintWriter(path);
-		writer.print(fileToOutput);
-		writer.close();
 	}
 
-
-	public static void main(String[] args) throws FileNotFoundException {
-		RandomConfig x = new RandomConfig();
-		x.writeToFile(x.getPath());
-	}
 }
