@@ -83,7 +83,7 @@ public class RandomConfig {
 	 * 
 	 * @return
 	 */
-	public ArrayList<Rule> getRuleMap() {
+	public ArrayList<Rule> getRuleList() {
 		return rules;
 	}
 
