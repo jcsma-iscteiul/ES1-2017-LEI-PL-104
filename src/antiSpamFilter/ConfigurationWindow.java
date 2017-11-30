@@ -13,6 +13,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class ConfigurationWindow {
 
@@ -42,6 +43,7 @@ public class ConfigurationWindow {
 		window.add(GRC);
 		window.add(EDIT);
 		window.setVisible(true);
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
 		GRC.addActionListener(new ActionListener() {
@@ -49,10 +51,16 @@ public class ConfigurationWindow {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				String path = Gui.getInstance().getRulesPath();
-				new RandomConfig(path);
-
-
+				String rulesPath = Gui.getInstance().getRulesPath();
+				String spamPath = Gui.getInstance().getSpamPath();
+				String hamPath = Gui.getInstance().getHamPath();
+				RandomConfig rc = new RandomConfig(rulesPath);
+				LogReader lr1 = new LogReader(spamPath);
+				LogReader lr2 = new LogReader(hamPath);
+				DetectionCalculator dc = new DetectionCalculator(rc, lr1, lr2);
+				int FP = dc.calculateFP();
+				int FN = dc.calculateFN();
+				JOptionPane.showMessageDialog(null, "False positives found: "+FP+", False negatives found: "+FN);
 			}
 		});
 
@@ -67,20 +75,27 @@ public class ConfigurationWindow {
 				JComboBox comboBox = new JComboBox<>();
 				ArrayList<String> list;
 
-				File file = new File("C:\\Users\\HP\\Desktop\\rules.cf");
+				File file = new File(Gui.getInstance().getRulesPath());
 
 				try{
 					Scanner s = new Scanner(file);
 					list = new ArrayList<String>();
-					while (s.hasNext()){
-						list.add(s.next());
+					while (s.hasNextLine()){
+						String l = s.nextLine();
+						list.add(l.split(" ")[0]);
 					}
 					s.close();
 
 					comboBox.setModel(new DefaultComboBoxModel<>(list.toArray()));
+					comboBox.addActionListener(new ActionListener() {
+						
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							
+							
+						}
+					});
 
-
-					System.out.println(list);
 				}
 				catch (Exception exc) {
 
