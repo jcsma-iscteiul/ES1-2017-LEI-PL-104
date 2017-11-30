@@ -5,7 +5,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class FileChooser {
 
-	
 	private String a;
 	private String b;
 	private String cf;
@@ -13,8 +12,12 @@ public class FileChooser {
 	/***
 	 * This class is used to build a JFileChooser with filter for files. 
 	 * It returns the path to the selected file.
-	 * @return
+	 * 
 	 * @author rccms-iscteiul
+	 * 
+	 * @param a - file description (ex: *.txt)
+	 * @param b - file extension (ex: txt)
+	 * 
 	 */
 	
 	public FileChooser(String a, String b) {
@@ -25,9 +28,9 @@ public class FileChooser {
 	
 	/***
 	 * Builds a JFileChooser.
-	 * @param a file description (ex: *.txt)
-	 * @param b file extension (ex: txt)
-	 * @return path to the file
+	 * 
+	 * @return path to the file with the description and extension specified in constructor
+	 * 
 	 */
 	public String buildFileChooser() {
 		
@@ -38,7 +41,5 @@ public class FileChooser {
 		return cf;
 		
 	}
-	
-	
 
 }

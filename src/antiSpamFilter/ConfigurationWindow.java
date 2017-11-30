@@ -1,14 +1,11 @@
 package antiSpamFilter;
 
-import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -20,10 +17,15 @@ public class ConfigurationWindow {
 	private JFrame window;
 	private JButton GRC;
 	private JButton EDIT;
+	private JButton FPN;
+	private RandomConfig rc;
+	private LogReader lr1;
+	private LogReader lr2;
 
 
 	/***
-	 * Builds a configuration window with two buttons to choose between Generate Random Configuration and Edit the file rules.cf.
+	 * Builds a configuration window.
+	 * 
 	 * @author rccms-iscteiul
 	 */
 	
@@ -31,17 +33,22 @@ public class ConfigurationWindow {
 		buildWindow();
 	}
 
-
+	/***
+	 * Builds a window with three buttons. Choose between Generate Random Configuration, Edit the file rules.cf or
+	 * calculate FP and FN.
+	 */
 	private void buildWindow(){
 
 		window = new JFrame("Configuration Window");
 		window.setSize(400, 125);
-		center(window);
-		window.setLayout(new GridLayout(2, 1));
+		Gui.getInstance().center(window);
+		window.setLayout(new GridLayout(3, 1));
 		GRC = new JButton("Generate Random Configuration");
 		EDIT = new JButton("Edit rules.cf");
+		FPN = new JButton("Calculate FP e FN");
 		window.add(GRC);
 		window.add(EDIT);
+		window.add(FPN);
 		window.setVisible(true);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -54,13 +61,10 @@ public class ConfigurationWindow {
 				String rulesPath = Gui.getInstance().getRulesPath();
 				String spamPath = Gui.getInstance().getSpamPath();
 				String hamPath = Gui.getInstance().getHamPath();
-				RandomConfig rc = new RandomConfig(rulesPath);
-				LogReader lr1 = new LogReader(spamPath);
-				LogReader lr2 = new LogReader(hamPath);
-				DetectionCalculator dc = new DetectionCalculator(rc, lr1, lr2);
-				int FP = dc.calculateFP();
-				int FN = dc.calculateFN();
-				JOptionPane.showMessageDialog(null, "False positives found: "+FP+", False negatives found: "+FN);
+				rc = new RandomConfig(rulesPath);
+				lr1 = new LogReader(spamPath);
+				lr2 = new LogReader(hamPath);
+				JOptionPane.showMessageDialog(null, "Done!");
 			}
 		});
 
@@ -70,9 +74,9 @@ public class ConfigurationWindow {
 			public void actionPerformed(ActionEvent e) {
 
 				JFrame f = new JFrame();
-				center(f);
+				Gui.getInstance().center(f);
 				f.setSize(300, 60);
-				JComboBox comboBox = new JComboBox<>();
+				JComboBox<Object> comboBox = new JComboBox<>();
 				ArrayList<String> list;
 
 				File file = new File(Gui.getInstance().getRulesPath());
@@ -92,7 +96,7 @@ public class ConfigurationWindow {
 						@Override
 						public void actionPerformed(ActionEvent e) {
 							
-							
+							System.out.println(comboBox.getSelectedItem().toString());
 						}
 					});
 
@@ -105,15 +109,20 @@ public class ConfigurationWindow {
 				f.setVisible(true);;
 			}
 		});
+		
+		
+		
+		FPN.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				DetectionCalculator dc = new DetectionCalculator(rc, lr1, lr2);
+				int FP = dc.calculateFP();
+				int FN = dc.calculateFN();
+				JOptionPane.showMessageDialog(null, "False positives found: "+FP+", False negatives found: "+FN);
+			}
+		});
 
 	}
-
-
-	private void center(JFrame frame) {
-		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-		int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
-		int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
-		frame.setLocation(x, y);
-	}
-
+	
 }

@@ -7,17 +7,12 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-
-import javax.management.InstanceAlreadyExistsException;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Gui {
 
@@ -37,20 +32,26 @@ public class Gui {
 	private String rulesPath;
 	private String spamPath;
 	private String hamPath;
-	public static final Gui INSTANCE = new Gui() ;
+	private static final Gui INSTANCE = new Gui() ;
 	
-	public static Gui getInstance() {
-		return Gui.INSTANCE;
-	}
-	
-
 	/***
-	 * Builds a new GUI´
+	 * private constructor. Don't let anyone else instantiate this class.
+	 * 
 	 * @author rccms-iscteiul
+	 * 
 	 */
 	private Gui () {
 		pathWindow();
 	}
+	
+	
+	/***
+	 * @return Gui INSTANCE
+	 */
+	public static Gui getInstance() {
+		return Gui.INSTANCE;
+	}
+	
 
 	/***
 	 * This method builds a window to choose the path to the files.
@@ -59,7 +60,7 @@ public class Gui {
 		frame = new JFrame("Anti-spam Filtering Configuration");
 		frame.setLayout(new GridLayout(5, 1));
 		frame.setSize(400,150);
-		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		center(frame);
 
 
@@ -171,6 +172,12 @@ public class Gui {
 	}
 
 
+	/***
+	 * Puts the JFrame in the middle of the screen
+	 * 
+	 * @param frame JFrame that we want to center on the screen.
+	 * 
+	 */
 	public void center(JFrame frame) {
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
@@ -179,20 +186,32 @@ public class Gui {
 	}
 
 	
+	/***
+	 * returns the value of rulesPath
+	 * @return rulesPath
+	 */
 	public String getRulesPath() {
 		return rulesPath;
 	}
 
-
+	/***
+	 * returns the value of spamPath
+	 * @return spamPath
+	 */
 	public String getSpamPath() {
 		return spamPath;
 	}
 
-
+	/***
+	 * returns the value of hamPath
+	 * @return hamPath
+	 */
 	public String getHamPath() {
 		return hamPath;
 	}
 
+	
+	
 	public static void main(String[] args) {
 		Gui.getInstance();
 	}
