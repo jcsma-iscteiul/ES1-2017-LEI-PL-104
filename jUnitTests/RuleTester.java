@@ -1,39 +1,43 @@
 package antiSpamFilter;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class RuleTester {
+public class RuleTester {
+	
+	private Rule test = new Rule("Regra", -4);
 
-	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
 	}
 
-	@AfterAll
-	static void tearDownAfterClass() throws Exception {
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
 	}
 
-	@BeforeEach
-	void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 	}
 
-	@AfterEach
-	void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 	}
 
 	@Test
-	final void testRule() {
-		fail("Not yet implemented"); // TODO
+	public final void test() {
+		
 	}
-
+	
 	@Test
 	final void testGetRule() {
-		fail("Not yet implemented"); // TODO
+		assertEquals("Regra", test.getRule(), "O nome da regra de ser Regra");
 	}
 
 	@Test
@@ -48,11 +52,6 @@ class RuleTester {
 
 	@Test
 	final void testEquals() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	final void testToString1() {
 		fail("Not yet implemented"); // TODO
 	}
 
