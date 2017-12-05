@@ -52,7 +52,8 @@ public class ConfigurationWindow {
 		window.setVisible(true);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
+// Generate Random Configuration Button
+//This is what happens when you press the GRC Button
 		GRC.addActionListener(new ActionListener() {
 
 			@Override
@@ -68,6 +69,9 @@ public class ConfigurationWindow {
 			}
 		});
 
+//Edit the file rules.cf
+//Here you can choose the rule that you want and change the weight of that rule
+//This button will open a new window
 		EDIT.addActionListener(new ActionListener() {
 
 			@Override
@@ -76,36 +80,46 @@ public class ConfigurationWindow {
 				JFrame f = new JFrame();
 				Gui.getInstance().center(f);
 				f.setSize(300, 60);
-				JComboBox<Object> comboBox = new JComboBox<>();
-				ArrayList<String> list;
+				f.setLayout(new GridLayout(1, 3));
+				JComboBox<Object> rulesComboBox = new JComboBox<>();
+				JComboBox<Object> weightsComboBox = new JComboBox<>();
+				JButton applyButton = new JButton("Apply");
+				f.add(rulesComboBox);
+				f.add(weightsComboBox);
+				f.add(applyButton);
+//				f.pack();
+				
+				ArrayList<String> rulesList;
+				ArrayList<String> weightsList;
 
-				File file = new File(Gui.getInstance().getRulesPath());
+//				File file = new File(Gui.getInstance().getRulesPath());
+//
+//				try{
+//					Scanner s = new Scanner(file);
+					rulesList = new ArrayList<String>();
+//					while (s.hasNextLine()){
+//						String line = s.nextLine();
+//						String rule = line.split(" ")[0];
+//						rulesList.add(rule);
+//					}
+//					s.close();
+//
+					rulesComboBox.setModel(new DefaultComboBoxModel<>(rulesList.toArray()));
+//					rulesComboBox.addActionListener(new ActionListener() {
+//						
+//						@Override
+//						public void actionPerformed(ActionEvent e) {
+//							
+//							System.out.println(rulesComboBox.getSelectedItem().toString());
+//						}
+//					});
+//
+//				}
+//				catch (Exception exc) {
+//
+//				}
 
-				try{
-					Scanner s = new Scanner(file);
-					list = new ArrayList<String>();
-					while (s.hasNextLine()){
-						String l = s.nextLine();
-						list.add(l.split(" ")[0]);
-					}
-					s.close();
-
-					comboBox.setModel(new DefaultComboBoxModel<>(list.toArray()));
-					comboBox.addActionListener(new ActionListener() {
-						
-						@Override
-						public void actionPerformed(ActionEvent e) {
-							
-							System.out.println(comboBox.getSelectedItem().toString());
-						}
-					});
-
-				}
-				catch (Exception exc) {
-
-				}
-
-				f.add(comboBox);
+			
 				f.setVisible(true);;
 			}
 		});
@@ -125,4 +139,10 @@ public class ConfigurationWindow {
 
 	}
 	
+	
+	
+	
+	public static void main(String[] args) {
+		new ConfigurationWindow();
+	}
 }
