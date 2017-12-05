@@ -52,8 +52,8 @@ public class ConfigurationWindow {
 		window.setVisible(true);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-// Generate Random Configuration Button
-//This is what happens when you press the GRC Button
+		// Generate Random Configuration Button
+		//This is what happens when you press the GRC Button
 		GRC.addActionListener(new ActionListener() {
 
 			@Override
@@ -69,9 +69,9 @@ public class ConfigurationWindow {
 			}
 		});
 
-//Edit the file rules.cf
-//Here you can choose the rule that you want and change the weight of that rule
-//This button will open a new window
+		//Edit the file rules.cf
+		//Here you can choose the rule that you want and change the weight of that rule
+		//This button will open a new window
 		EDIT.addActionListener(new ActionListener() {
 
 			@Override
@@ -93,31 +93,31 @@ public class ConfigurationWindow {
 				ArrayList<String> weightsList;
 
 //				File file = new File(Gui.getInstance().getRulesPath());
-//
-//				try{
-//					Scanner s = new Scanner(file);
-					rulesList = new ArrayList<String>();
-//					while (s.hasNextLine()){
-//						String line = s.nextLine();
-//						String rule = line.split(" ")[0];
-//						rulesList.add(rule);
-//					}
-//					s.close();
-//
-					rulesComboBox.setModel(new DefaultComboBoxModel<>(rulesList.toArray()));
-//					rulesComboBox.addActionListener(new ActionListener() {
-//						
-//						@Override
-//						public void actionPerformed(ActionEvent e) {
-//							
-//							System.out.println(rulesComboBox.getSelectedItem().toString());
-//						}
-//					});
-//
-//				}
-//				catch (Exception exc) {
-//
-//				}
+				//
+//								try{
+//									Scanner s = new Scanner(file);
+									rulesList = new ArrayList<String>();
+//									while (s.hasNextLine()){
+//										String line = s.nextLine();
+//										String rule = line.split(" ")[0];
+//										rulesList.add(rule);
+//									}
+//									s.close();
+				//
+									rulesComboBox.setModel(new DefaultComboBoxModel<>(rulesList.toArray()));
+//									rulesComboBox.addActionListener(new ActionListener() {
+//										
+//										@Override
+//										public void actionPerformed(ActionEvent e) {
+//											
+//											System.out.println(rulesComboBox.getSelectedItem().toString());
+//										}
+//									});
+				//
+//								}
+//								catch (Exception exc) {
+				//
+//								}
 
 			
 				f.setVisible(true);;

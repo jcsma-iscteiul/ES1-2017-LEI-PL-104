@@ -12,7 +12,7 @@ public class DetectionCalculator {
 	public DetectionCalculator(RandomConfig rc, LogReader lrSPAM, LogReader lrHAM) {
 		this.rc = rc;
 		this.lrSPAM = lrSPAM;
-		this.lrHAM = lrHAM;b
+		this.lrHAM = lrHAM;
 	}
 
 	public int calculateFP() {
