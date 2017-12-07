@@ -38,9 +38,6 @@ public class ReadConfiguration {
 	}
 
 	public HashMap<String, String> getConfiguration() {
-		for(String i : rulesWeight.keySet()) {
-			System.out.println(rulesWeight.get(i));
-		}
 		return rulesWeight;
 	}
 

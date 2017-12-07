@@ -4,10 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -17,9 +13,7 @@ import javax.swing.JPanel;
 
 public class EditWindow {
 
-	private ArrayList<String> rulesList;
-	private ArrayList<String> weightsList;
-	private File file;
+	private ReadConfiguration rc;
 
 	/***
 	 * This constructor builds a new Edit Window. This window will allow you to change things in the file rules.cf.
@@ -27,8 +21,8 @@ public class EditWindow {
 	 * 
 	 * @author rccms-iscteiul
 	 */
-	public EditWindow() {
-		file = new File(Gui.getInstance().getRulesPath());
+	public EditWindow(ReadConfiguration rc) {
+		this.rc = rc;
 		build();
 	}
 
@@ -51,11 +45,9 @@ public class EditWindow {
 		f.add(p);
 		f.add(applyButton);
 
-		takeCareOfRules();
-		takeCareOfWeights();
-
-		rulesComboBox.setModel(new DefaultComboBoxModel<>(rulesList.toArray()));
-		weightsComboBox.setModel(new DefaultComboBoxModel<>(weightsList.toArray()));
+		String[] weights = {"-5","-4","-3","-2","-1","0","1","2","3","4","5"};
+		rulesComboBox.setModel(new DefaultComboBoxModel<>(rc.getConfiguration().keySet().toArray()));
+		weightsComboBox.setModel(new DefaultComboBoxModel<>(weights));
 
 		
 		rulesComboBox.addActionListener(new ActionListener() {
@@ -63,8 +55,7 @@ public class EditWindow {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				String currentWeight = theCurrentWeightofRule(rulesComboBox.getSelectedItem().toString());
-				weightsComboBox.setSelectedItem(currentWeight);
+				weightsComboBox.setSelectedItem(rc.getConfiguration().get(rulesComboBox.getSelectedItem()));
 				
 			}
 		});
@@ -81,64 +72,5 @@ public class EditWindow {
 
 		f.setVisible(true);
 	}
-
-	
-	private String theCurrentWeightofRule(String a) {
-		
-		String weight = null;
-		
-		try {
-			Scanner s = new Scanner(file);
-			while (s.hasNextLine()){
-				String line = s.nextLine();
-				String rule = line.split(" ")[0];
-				
-				if(rule.equals(a)) {
-					weight = line.split(" ")[1]; 
-				}
-			}
-			s.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return weight;
-		
-	}
-	
-	
-
-	private void takeCareOfRules (){
-
-		try {
-
-			rulesList = new ArrayList<String>();
-
-			Scanner s = new Scanner(file);
-			while (s.hasNextLine()){
-				String line = s.nextLine();
-				String rule = line.split(" ")[0];
-				rulesList.add(rule);
-			}
-			s.close();
-
-		} catch (FileNotFoundException e) {
-			// TODO: handle exception
-		}
-
-	}
-
-
-	private void takeCareOfWeights (){
-
-		weightsList = new ArrayList<String>();
-
-		for (int i = -5 ; i<6; i++) {
-			weightsList.add(String.valueOf(i));
-		}
-
-	}
-
 
 }

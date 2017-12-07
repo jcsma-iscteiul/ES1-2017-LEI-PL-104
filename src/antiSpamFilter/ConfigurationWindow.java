@@ -13,7 +13,7 @@ public class ConfigurationWindow {
 	private JButton GRC;
 	private JButton EDIT;
 	private JButton FPN;
-	private RandomConfig rc;
+	private ReadConfiguration rc;
 	private LogReader lr1;
 	private LogReader lr2;
 
@@ -23,7 +23,7 @@ public class ConfigurationWindow {
 	 * 
 	 * @author rccms-iscteiul
 	 */
-	
+
 	public ConfigurationWindow() {
 		buildWindow();
 	}
@@ -46,6 +46,12 @@ public class ConfigurationWindow {
 		window.add(FPN);
 		window.setVisible(true);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		String rulesPath = Gui.getInstance().getRulesPath();
+		String spamPath = Gui.getInstance().getSpamPath();
+		String hamPath = Gui.getInstance().getHamPath();
+		lr1 = new LogReader(spamPath);
+		lr2 = new LogReader(hamPath);
+		rc = new ReadConfiguration(rulesPath);
 
 		// Generate Random Configuration Button
 		//This is what happens when you press the GRC Button
@@ -54,12 +60,7 @@ public class ConfigurationWindow {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				String rulesPath = Gui.getInstance().getRulesPath();
-				String spamPath = Gui.getInstance().getSpamPath();
-				String hamPath = Gui.getInstance().getHamPath();
-				rc = new RandomConfig(rulesPath);
-				lr1 = new LogReader(spamPath);
-				lr2 = new LogReader(hamPath);
+				rc.applyRandomConfig();
 				JOptionPane.showMessageDialog(null, "Done!");
 			}
 		});
@@ -71,25 +72,32 @@ public class ConfigurationWindow {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				new EditWindow();
-				
+				if(rc.getWasTherePreviousConfig()) {
+					new EditWindow(rc);
+				}else {
+					JOptionPane.showMessageDialog(null, "Generate something first");
+				}
+
 			}
 		});
-		
-		
-		
+
+
+
 		FPN.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				DetectionCalculator dc = new DetectionCalculator(rc, lr1, lr2);
-				int FP = dc.calculateFP();
-				int FN = dc.calculateFN();
-				JOptionPane.showMessageDialog(null, "False positives found: "+FP+", False negatives found: "+FN);
+				if(rc.getWasTherePreviousConfig()) {
+					DetectionCalculator dc = new DetectionCalculator(rc, lr1, lr2);
+					int FP = dc.calculateFP();
+					int FN = dc.calculateFN();
+					JOptionPane.showMessageDialog(null, "False positives found: "+FP+", False negatives found: "+FN);
+				}else {
+					JOptionPane.showMessageDialog(null, "Generate something first");
+				}
 			}
 		});
 
 	}
-	
+
 }

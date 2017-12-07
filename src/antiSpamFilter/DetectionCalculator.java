@@ -1,15 +1,14 @@
 package antiSpamFilter;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DetectionCalculator {
 
-	private RandomConfig rc;
+	private ReadConfiguration rc;
 	private LogReader lrSPAM;
 	private LogReader lrHAM;
 
-	public DetectionCalculator(RandomConfig rc, LogReader lrSPAM, LogReader lrHAM) {
+	public DetectionCalculator(ReadConfiguration rc, LogReader lrSPAM, LogReader lrHAM) {
 		this.rc = rc;
 		this.lrSPAM = lrSPAM;
 		this.lrHAM = lrHAM;
@@ -17,16 +16,11 @@ public class DetectionCalculator {
 
 	public int calculateFP() {
 		HashMap<String, String[]> msgHash = lrSPAM.getMsgRules();
-		ArrayList<Rule> weightRules = rc.getRuleList();
 		int FP = 0;
 		int msgTotalWeight = 0;
 		for(String i : msgHash.keySet()) { //iterar as mensagens
 			for(int x = 0;x<msgHash.get(i).length;x++) { //iterar as regras das mensagens
-				for(int y = 0;y<weightRules.size();y++) { // iterar as regras
-					if(msgHash.get(i)[x].equals(weightRules.get(y).getRule())) {
-						msgTotalWeight = msgTotalWeight + weightRules.get(y).getWeight();
-					}
-				}
+				msgTotalWeight = msgTotalWeight + Integer.parseInt((rc.getConfiguration().get(msgHash.get(i)[x])));
 			}
 			if(msgTotalWeight<=5) {
 				FP++;
@@ -38,16 +32,11 @@ public class DetectionCalculator {
 
 	public int calculateFN() {
 		HashMap<String, String[]> msgHash = lrHAM.getMsgRules();
-		ArrayList<Rule> weightRules = rc.getRuleList();
 		int FN = 0;
 		int msgTotalWeight = 0;
 		for(String i : msgHash.keySet()) { //iterar as mensagens
 			for(int x = 0;x<msgHash.get(i).length;x++) { //iterar as regras das mensagens
-				for(int y = 0;y<weightRules.size();y++) { // iterar as regras
-					if(msgHash.get(i)[x].equals(weightRules.get(y).getRule())) {
-						msgTotalWeight = msgTotalWeight + weightRules.get(y).getWeight();
-					}
-				}
+				msgTotalWeight = msgTotalWeight + Integer.parseInt((rc.getConfiguration().get(msgHash.get(i)[x])));
 			}
 			if(msgTotalWeight>5) {
 				FN++;
