@@ -67,6 +67,20 @@ public class ReadConfiguration {
 		}
 	}
 	
+	public void writeConfig() {
+		PrintWriter writer;
+		try {
+			writer = new PrintWriter(path);
+			for(String i : rulesWeight.keySet()) {
+				String l = i + " " + rulesWeight.get(i) + "\n";
+				writer.print(l);
+			}
+			writer.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public boolean getWasTherePreviousConfig() {
 		return read;
 	}

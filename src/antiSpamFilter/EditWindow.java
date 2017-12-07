@@ -48,25 +48,26 @@ public class EditWindow {
 		String[] weights = {"-5","-4","-3","-2","-1","0","1","2","3","4","5"};
 		rulesComboBox.setModel(new DefaultComboBoxModel<>(rc.getConfiguration().keySet().toArray()));
 		weightsComboBox.setModel(new DefaultComboBoxModel<>(weights));
+		weightsComboBox.setSelectedItem(rc.getConfiguration().get(rulesComboBox.getSelectedItem()));
 
-		
+
 		rulesComboBox.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
 				weightsComboBox.setSelectedItem(rc.getConfiguration().get(rulesComboBox.getSelectedItem()));
-				
+
 			}
 		});
-		
-		
+
+
 		applyButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				 // apply not yet implemented
-				
+				rc.getConfiguration().put(rulesComboBox.getSelectedItem().toString(), weightsComboBox.getSelectedItem().toString());
+				rc.writeConfig();
 			}
 		});
 
