@@ -2,13 +2,16 @@ package antiSpamFilter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.Scanner;
 
 public class ReadConfiguration {
 
 	private String path;
 	private HashMap<String, String> rulesWeight;
+	private boolean read = true;
 
 	public ReadConfiguration(String path) {
 		this.path = path;
@@ -25,8 +28,8 @@ public class ReadConfiguration {
 				if(l.split(" ").length != 1) {
 					rulesWeight.put(l.split(" ")[0], l.split(" ")[1]);
 				}else {
-					rulesWeight = null;
-					break;
+					read = false;
+					rulesWeight.put(l, "");
 				}
 			}
 		}catch(FileNotFoundException e) {
@@ -35,17 +38,40 @@ public class ReadConfiguration {
 	}
 
 	public HashMap<String, String> getConfiguration() {
-		if(rulesWeight != null) {
-			return rulesWeight;
-		}else {
-			return null;
+		for(String i : rulesWeight.keySet()) {
+			System.out.println(rulesWeight.get(i));
 		}
-		
+		return rulesWeight;
 	}
 
-	public static void main(String[] args) {
-		ReadConfiguration r = new ReadConfiguration("C:\\Users\\Adolfo\\Documents\\ES Proj Files\\rules.cf");
-		HashMap<String, String> config = r.getConfiguration();
+	private int generateRandom(int min, int max) {
+		Random random = new Random();
+		return random.nextInt((max-min)+1)-5;
+	}
+
+	private void generateRandomConfig() {
+		for(String i : rulesWeight.keySet()) {
+			rulesWeight.put(i, String.valueOf(generateRandom(-5,5)));
+		}
+	}
+
+	public void applyRandomConfig() {
+		generateRandomConfig();
+		PrintWriter writer;
+		try {
+			writer = new PrintWriter(path);
+			for(String i : rulesWeight.keySet()) {
+				String l = i + " " + rulesWeight.get(i) + "\n";
+				writer.print(l);
+			}
+			writer.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public boolean getWasTherePreviousConfig() {
+		return read;
 	}
 
 }
