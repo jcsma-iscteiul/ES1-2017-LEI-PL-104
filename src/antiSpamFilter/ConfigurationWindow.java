@@ -3,12 +3,7 @@ package antiSpamFilter;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Scanner;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -76,51 +71,9 @@ public class ConfigurationWindow {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-				JFrame f = new JFrame();
-				Gui.getInstance().center(f);
-				f.setSize(300, 60);
-				f.setLayout(new GridLayout(1, 3));
-				JComboBox<Object> rulesComboBox = new JComboBox<>();
-				JComboBox<Object> weightsComboBox = new JComboBox<>();
-				JButton applyButton = new JButton("Apply");
-				f.add(rulesComboBox);
-				f.add(weightsComboBox);
-				f.add(applyButton);
-//				f.pack();
 				
-				ArrayList<String> rulesList;
-				ArrayList<String> weightsList;
-
-//				File file = new File(Gui.getInstance().getRulesPath());
-				//
-//								try{
-//									Scanner s = new Scanner(file);
-									rulesList = new ArrayList<String>();
-//									while (s.hasNextLine()){
-//										String line = s.nextLine();
-//										String rule = line.split(" ")[0];
-//										rulesList.add(rule);
-//									}
-//									s.close();
-				//
-									rulesComboBox.setModel(new DefaultComboBoxModel<>(rulesList.toArray()));
-//									rulesComboBox.addActionListener(new ActionListener() {
-//										
-//										@Override
-//										public void actionPerformed(ActionEvent e) {
-//											
-//											System.out.println(rulesComboBox.getSelectedItem().toString());
-//										}
-//									});
-				//
-//								}
-//								catch (Exception exc) {
-				//
-//								}
-
-			
-				f.setVisible(true);;
+				new EditWindow();
+				
 			}
 		});
 		
@@ -139,10 +92,4 @@ public class ConfigurationWindow {
 
 	}
 	
-	
-	
-	
-	public static void main(String[] args) {
-		new ConfigurationWindow();
-	}
 }
