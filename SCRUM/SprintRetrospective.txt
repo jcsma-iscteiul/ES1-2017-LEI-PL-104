@@ -1,0 +1,12 @@
+Em retrospetiva, o sprint correu deveras bem, a Validação e Verificação do Software foi, apesar de tudo, adiada porque as horas disponíveis dos programadores foi sobrestimada.
+
+A interface gráfica precisa apenas de pequenos ajustes para cumprir os requesitos do cliente, o Change Random Config e o Random Config estão completos.
+
+GUI:
+Permite ao utilizador definir os caminhos para os ficheiros rules.cf, ham.log e spam.log usando um interface gráfica baseada em java.
+
+Random Config:
+Permite ao utilizador gerar uma configuração aleatória, por exemplo um vetor de pesos para os as regras de filtragem anti-spam presentes no ficheiro rules.cf gerado aleatoriamente e mostrar o montante resultade de Falsos Positivos e de Falsos Negativos dessa configuração.
+
+Change Random Config:
+Permite ao utilizador editar/mudar uma configuração gerada automáticamente e atualizar o montante resultande de Falsos Positivos e de Falsos Negativos para essa nova configuração.
