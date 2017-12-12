@@ -43,12 +43,16 @@ public class LogReader {
 			for(int i = 1;i<line.length;i++) {
 				rules[i-1] = line[i];
 			}
-			msgRules.put(id, rules);
+			addContent(id, rules);
 		}
 	}
 	
 	public HashMap<String, String[]> getMsgRules() {
 		return msgRules;
+	}
+	
+	public void addContent(String a, String[] b) {
+		msgRules.put(a, b);
 	}
 	
 }
