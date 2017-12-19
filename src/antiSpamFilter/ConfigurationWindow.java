@@ -16,6 +16,9 @@ public class ConfigurationWindow {
 	private ReadConfiguration rc;
 	private LogReader lr1;
 	private LogReader lr2;
+	private int FP;
+	private int FN;
+	private ConfigurationWindow cw;
 
 
 	/***
@@ -25,12 +28,18 @@ public class ConfigurationWindow {
 	 */
 
 	public ConfigurationWindow() {
+		cw = this;
 		buildWindow();
+		calculateFPN();
 	}
 
 	/***
-	 * Builds a window with three buttons. Choose between Generate Random Configuration, Edit the file rules.cf or
-	 * calculate FP and FN.
+	 * Builds a window where you can choose between:
+	 * generate a random configuration,
+	 * edit/change that configuration,
+	 * calculate the amount of FP and FN,
+	 * generate an optimal configuration using the NSGA-II algorithm 
+	 * 
 	 */
 	private void buildWindow(){
 
@@ -53,6 +62,11 @@ public class ConfigurationWindow {
 		lr2 = new LogReader(hamPath);
 		rc = new ReadConfiguration(rulesPath);
 
+		
+		
+		
+		// Action Listeners
+		
 		// Generate Random Configuration Button
 		//This is what happens when you press the GRC Button
 		GRC.addActionListener(new ActionListener() {
@@ -61,19 +75,21 @@ public class ConfigurationWindow {
 			public void actionPerformed(ActionEvent e) {
 
 				rc.applyRandomConfig();
-				JOptionPane.showMessageDialog(null, "Done!");
+				calculateFPN();
+				JOptionPane.showMessageDialog(null, "Done!\n"+"False Positives: "+FP+"\nFalse Negatives: "+FN);
 			}
 		});
 
+		
+		//This button will open a new window
 		//Edit the file rules.cf
 		//Here you can choose the rule that you want and change the weight of that rule
-		//This button will open a new window
 		EDIT.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(rc.getWasTherePreviousConfig()) {
-					new EditWindow(rc);
+					new EditWindow(rc, cw);
 				}else {
 					JOptionPane.showMessageDialog(null, "Generate something first");
 				}
@@ -81,23 +97,34 @@ public class ConfigurationWindow {
 			}
 		});
 
-
-
+		//This button shows the amount of False Positives and False Negatives of the current configuration
 		FPN.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(rc.getWasTherePreviousConfig()) {
-					DetectionCalculator dc = new DetectionCalculator(rc, lr1, lr2);
-					int FP = dc.calculateFP();
-					int FN = dc.calculateFN();
-					JOptionPane.showMessageDialog(null, "False positives found: "+FP+", False negatives found: "+FN);
-				}else {
-					JOptionPane.showMessageDialog(null, "Generate something first");
-				}
+				showFPN();
 			}
 		});
 
+
 	}
 
+	
+	public void showFPN() {
+		if(rc.getWasTherePreviousConfig()) {
+			JOptionPane.showMessageDialog(null, "False positives found: "+FP+", False negatives found: "+FN);
+		}else {
+			JOptionPane.showMessageDialog(null, "Generate something first");
+		} 
+		
+	}
+
+	public void calculateFPN () {
+		DetectionCalculator dc = new DetectionCalculator(rc, lr1, lr2);
+		FP = dc.calculateFP();
+		FN = dc.calculateFN();
+	}
+	
+
 }
+
