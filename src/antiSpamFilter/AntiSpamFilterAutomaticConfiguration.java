@@ -4,12 +4,8 @@ import org.uma.jmetal.algorithm.Algorithm;
 import org.uma.jmetal.algorithm.multiobjective.nsgaii.NSGAIIBuilder;
 import org.uma.jmetal.operator.impl.crossover.SBXCrossover;
 import org.uma.jmetal.operator.impl.mutation.PolynomialMutation;
-import org.uma.jmetal.problem.Problem;
-import org.uma.jmetal.problem.multiobjective.zdt.*;
-import org.uma.jmetal.qualityindicator.impl.*;
 import org.uma.jmetal.qualityindicator.impl.hypervolume.PISAHypervolume;
 import org.uma.jmetal.solution.DoubleSolution;
-import org.uma.jmetal.util.JMetalException;
 import org.uma.jmetal.util.experiment.Experiment;
 import org.uma.jmetal.util.experiment.ExperimentBuilder;
 import org.uma.jmetal.util.experiment.component.*;
@@ -25,32 +21,37 @@ public class AntiSpamFilterAutomaticConfiguration {
   private static final int INDEPENDENT_RUNS = 5 ;
 
   public static void main(String[] args) throws IOException {
-//    String experimentBaseDirectory = "experimentBaseDirectory";
-//
-//    List<ExperimentProblem<DoubleSolution>> problemList = new ArrayList<>();
-//    problemList.add(new ExperimentProblem<>(new AntiSpamFilterProblem()));
-//
-//    List<ExperimentAlgorithm<DoubleSolution, List<DoubleSolution>>> algorithmList =
-//            configureAlgorithmList(problemList);
-//
-//    Experiment<DoubleSolution, List<DoubleSolution>> experiment =
-//        new ExperimentBuilder<DoubleSolution, List<DoubleSolution>>("AntiSpamStudy")
-//            .setAlgorithmList(algorithmList)
-//            .setProblemList(problemList)
-//            .setExperimentBaseDirectory(experimentBaseDirectory)
-//            .setOutputParetoFrontFileName("FUN")
-//            .setOutputParetoSetFileName("VAR")
-//            .setReferenceFrontDirectory(experimentBaseDirectory+"/referenceFronts")
-//            .setIndicatorList(Arrays.asList(new PISAHypervolume<DoubleSolution>()))
-//            .setIndependentRuns(INDEPENDENT_RUNS)
-//            .setNumberOfCores(8)
-//            .build();
-//
-//    new ExecuteAlgorithms<>(experiment).run();
-//    new GenerateReferenceParetoSetAndFrontFromDoubleSolutions(experiment).run();
-//    new ComputeQualityIndicators<>(experiment).run() ;
-//    new GenerateLatexTablesWithStatistics(experiment).run() ;
-//    new GenerateBoxplotsWithR<>(experiment).setRows(1).setColumns(1).run() ;
+    String experimentBaseDirectory = "experimentBaseDirectory";
+
+    List<ExperimentProblem<DoubleSolution>> problemList = new ArrayList<>();
+    
+    AntiSpamFilterProblem ASFP = new AntiSpamFilterProblem(new ReadConfiguration("C:\\Users\\Adolfo\\git\\ES1-2017-LEI-PL-104\\resources\\rules.cf")
+    		, new LogReader("C:\\Users\\Adolfo\\git\\ES1-2017-LEI-PL-104\\resources\\spam.log")
+    		,new LogReader("C:\\Users\\Adolfo\\git\\ES1-2017-LEI-PL-104\\resources\\ham.log"));
+    
+    problemList.add(new ExperimentProblem<>(ASFP));
+
+    List<ExperimentAlgorithm<DoubleSolution, List<DoubleSolution>>> algorithmList =
+            configureAlgorithmList(problemList);
+
+    Experiment<DoubleSolution, List<DoubleSolution>> experiment =
+        new ExperimentBuilder<DoubleSolution, List<DoubleSolution>>("AntiSpamStudy")
+            .setAlgorithmList(algorithmList)
+            .setProblemList(problemList)
+            .setExperimentBaseDirectory(experimentBaseDirectory)
+            .setOutputParetoFrontFileName("FUN")
+            .setOutputParetoSetFileName("VAR")
+            .setReferenceFrontDirectory(experimentBaseDirectory+"/referenceFronts")
+            .setIndicatorList(Arrays.asList(new PISAHypervolume<DoubleSolution>()))
+            .setIndependentRuns(INDEPENDENT_RUNS)
+            .setNumberOfCores(8)
+            .build();
+
+    new ExecuteAlgorithms<>(experiment).run();
+    new GenerateReferenceParetoSetAndFrontFromDoubleSolutions(experiment).run();
+    new ComputeQualityIndicators<>(experiment).run() ;
+    new GenerateLatexTablesWithStatistics(experiment).run() ;
+    new GenerateBoxplotsWithR<>(experiment).setRows(1).setColumns(1).run() ;
     
   }
 
