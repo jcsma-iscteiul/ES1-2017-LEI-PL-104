@@ -65,6 +65,9 @@ public class AntiSpamFilterProblem extends AbstractDoubleProblem {
 				FN++;
 			}
 		}
+		
+		System.out.println(FN);
+		System.out.println(FP);
 
 		solution.setObjective(0, FN);
 		solution.setObjective(1, FP);

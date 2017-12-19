@@ -36,7 +36,7 @@ public class FileChooser {
 
 		JFileChooser fc = new JFileChooser();
 		fc.setFileFilter(new FileNameExtensionFilter(a, b));
-		int result = fc.showSaveDialog(null);
+		int result = fc.showOpenDialog(null);
 		if(result == JFileChooser.APPROVE_OPTION) {
 			cf = fc.getSelectedFile().getAbsolutePath();
 		}else if(result == JFileChooser.CANCEL_OPTION) {
