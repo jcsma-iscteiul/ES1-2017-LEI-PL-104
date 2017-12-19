@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 
 public class Gui {
 
-	
+
 	private JFrame frame;
 	private JPanel cfPanel;
 	private JPanel log1Panel;
@@ -33,7 +33,7 @@ public class Gui {
 	private String spamPath;
 	private String hamPath;
 	private static final Gui INSTANCE = new Gui() ;
-	
+
 	/***
 	 * private constructor. Don't let anyone else instantiate this class.
 	 * 
@@ -43,15 +43,15 @@ public class Gui {
 	private Gui () {
 		pathWindow();
 	}
-	
-	
+
+
 	/***
 	 * @return Gui INSTANCE
 	 */
 	public static Gui getInstance() {
 		return Gui.INSTANCE;
 	}
-	
+
 
 	/***
 	 * This method builds a window to choose the path to the files.
@@ -111,6 +111,9 @@ public class Gui {
 					cfPath.setForeground(Color.black);
 					cfPath.setText(rulesPath);
 				}
+				else if(rulesPath.equals("cancel")) {
+
+				}
 				else {
 					JOptionPane.showMessageDialog(null, "Wrong file. Try again.");
 				}
@@ -126,6 +129,9 @@ public class Gui {
 					log1Path.setForeground(Color.black);
 					log1Path.setText(spamPath);
 				}
+				else if(rulesPath.equals("cancel")) {
+
+				}
 				else {
 					JOptionPane.showMessageDialog(null, "Wrong file. Try again.");
 				}
@@ -140,6 +146,9 @@ public class Gui {
 				if(hamPath.contains("ham.log")) {
 					log2Path.setForeground(Color.black);
 					log2Path.setText(hamPath);
+				}
+				else if(rulesPath.equals("cancel")) {
+
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "Wrong file. Try again.");
@@ -185,7 +194,7 @@ public class Gui {
 		frame.setLocation(x, y);
 	}
 
-	
+
 	/***
 	 * returns the value of rulesPath
 	 * @return rulesPath
@@ -210,8 +219,8 @@ public class Gui {
 		return hamPath;
 	}
 
-	
-	
+
+
 	public static void main(String[] args) {
 		Gui.getInstance();
 	}

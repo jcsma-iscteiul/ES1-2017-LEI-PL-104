@@ -8,7 +8,7 @@ public class FileChooser {
 	private String a;
 	private String b;
 	private String cf;
-	
+
 	/***
 	 * This class is used to build a JFileChooser with filter for files. 
 	 * It returns the path to the selected file.
@@ -19,13 +19,13 @@ public class FileChooser {
 	 * @param b - file extension (ex: txt)
 	 * 
 	 */
-	
+
 	public FileChooser(String a, String b) {
 		this.a = a;
 		this.b=b;
 	}
-	
-	
+
+
 	/***
 	 * Builds a JFileChooser.
 	 * 
@@ -33,13 +33,17 @@ public class FileChooser {
 	 * 
 	 */
 	public String buildFileChooser() {
-		
+
 		JFileChooser fc = new JFileChooser();
 		fc.setFileFilter(new FileNameExtensionFilter(a, b));
-		fc.showOpenDialog(null);
-		cf = fc.getSelectedFile().getAbsolutePath();
+		int result = fc.showSaveDialog(null);
+		if(result == JFileChooser.APPROVE_OPTION) {
+			cf = fc.getSelectedFile().getAbsolutePath();
+		}else if(result == JFileChooser.CANCEL_OPTION) {
+			cf = "cancel";
+		}
 		return cf;
-		
+
 	}
 
 }
