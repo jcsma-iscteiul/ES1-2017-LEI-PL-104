@@ -1,8 +1,12 @@
-package antiSpamFilter;
+package Tests;
 
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+
+import Readers.LogReader;
+import Readers.ReadConfiguration;
+import Utils.DetectionCalculator;
 
 public class DetectionCalculatorTest {
 

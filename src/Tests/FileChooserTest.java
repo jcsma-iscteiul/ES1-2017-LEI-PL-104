@@ -1,9 +1,11 @@
-package antiSpamFilter;
+package Tests;
 
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+
+import GUI.FileChooser;
 
 public class FileChooserTest {
 

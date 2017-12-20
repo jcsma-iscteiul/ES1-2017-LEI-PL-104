@@ -1,6 +1,9 @@
-package antiSpamFilter;
+package Utils;
 
 import java.util.HashMap;
+
+import Readers.LogReader;
+import Readers.ReadConfiguration;
 
 public class DetectionCalculator {
 

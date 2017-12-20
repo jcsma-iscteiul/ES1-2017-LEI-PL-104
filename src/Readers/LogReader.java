@@ -1,4 +1,4 @@
-package antiSpamFilter;
+package Readers;
 
 import java.io.File;
 import java.io.FileNotFoundException;

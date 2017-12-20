@@ -1,4 +1,4 @@
-package antiSpamFilter;
+package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -10,6 +10,8 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import Readers.ReadConfiguration;
 
 public class EditWindow {
 

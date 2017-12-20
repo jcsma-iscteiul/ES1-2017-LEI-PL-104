@@ -7,6 +7,9 @@ import java.util.List;
 import org.uma.jmetal.problem.impl.AbstractDoubleProblem;
 import org.uma.jmetal.solution.DoubleSolution;
 
+import Readers.LogReader;
+import Readers.ReadConfiguration;
+
 public class AntiSpamFilterProblem extends AbstractDoubleProblem {
 	
 	private ReadConfiguration rc;

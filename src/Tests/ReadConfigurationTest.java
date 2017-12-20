@@ -1,4 +1,4 @@
-package antiSpamFilter;
+package Tests;
 
 import static org.junit.Assert.*;
 
@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import org.junit.Test;
+
+import Readers.ReadConfiguration;
 
 public class ReadConfigurationTest {
 

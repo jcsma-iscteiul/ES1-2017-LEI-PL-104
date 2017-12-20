@@ -1,4 +1,4 @@
-package antiSpamFilter;
+package GUI;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -6,6 +6,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+
+import Readers.LogReader;
+import Readers.ReadConfiguration;
+import Utils.DetectionCalculator;
 
 public class ConfigurationWindow {
 
