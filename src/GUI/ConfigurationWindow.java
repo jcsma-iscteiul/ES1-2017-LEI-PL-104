@@ -7,9 +7,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import Readers.AntiSpamFilesReader;
 import Readers.LogReader;
 import Readers.ReadConfiguration;
 import Utils.DetectionCalculator;
+import Utils.OptimalCalculator;
+import antiSpamFilter.AntiSpamFilterAutomaticConfiguration;
 
 public class ConfigurationWindow {
 
@@ -17,6 +20,7 @@ public class ConfigurationWindow {
 	private JButton GRC;
 	private JButton EDIT;
 	private JButton FPN;
+	private JButton GOC;
 	private ReadConfiguration rc;
 	private LogReader lr1;
 	private LogReader lr2;
@@ -50,13 +54,15 @@ public class ConfigurationWindow {
 		window = new JFrame("Configuration Window");
 		window.setSize(400, 125);
 		Gui.getInstance().center(window);
-		window.setLayout(new GridLayout(3, 1));
+		window.setLayout(new GridLayout(4, 1));
 		GRC = new JButton("Generate Random Configuration");
 		EDIT = new JButton("Edit rules.cf");
 		FPN = new JButton("Calculate FP e FN");
+		GOC = new JButton("Generate Optimal Configuration");
 		window.add(GRC);
 		window.add(EDIT);
 		window.add(FPN);
+		window.add(GOC);
 		window.setVisible(true);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		String rulesPath = Gui.getInstance().getRulesPath();
@@ -107,6 +113,21 @@ public class ConfigurationWindow {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				showFPN();
+			}
+		});
+		
+		
+		GOC.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new AntiSpamFilterAutomaticConfiguration();
+				AntiSpamFilesReader ASFR = new AntiSpamFilesReader("/ES1-2017/experimentBaseDirectory/referenceFronts/AntiSpamFilterProblem.rf",
+						"/ES1-2017/experimentBaseDirectory/referenceFronts/AntiSpamFilterProblem.rs");
+				new OptimalCalculator(rc,ASFR);
+				calculateFPN();
+				showFPN();
+				
 			}
 		});
 

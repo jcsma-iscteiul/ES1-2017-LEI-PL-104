@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import Readers.ReadConfiguration;
 
@@ -20,7 +21,7 @@ public class EditWindow {
 	private JPanel rulesAndWeightsPanel;
 	private JPanel buttonsPanel;
 	private JComboBox<Object> rulesComboBox;
-	private JComboBox<Object> weightsComboBox;
+	private JTextField rulesWeights;
 	private JButton applyButton;	
 	private JButton showAmountFPN;
 	private ReadConfiguration rc;
@@ -54,7 +55,7 @@ public class EditWindow {
 
 		//comboBoxes
 		rulesComboBox = new JComboBox<>();
-		weightsComboBox = new JComboBox<>();
+		rulesWeights = new JTextField();
 
 		//panels
 		mainPanel = new JPanel(new GridLayout(2, 1));
@@ -63,7 +64,7 @@ public class EditWindow {
 		mainPanel.add(rulesAndWeightsPanel);
 		mainPanel.add(buttonsPanel);
 		rulesAndWeightsPanel.add(rulesComboBox,BorderLayout.CENTER);
-		rulesAndWeightsPanel.add(weightsComboBox,BorderLayout.EAST);
+		rulesAndWeightsPanel.add(rulesWeights,BorderLayout.EAST);
 		buttonsPanel.add(applyButton);
 		buttonsPanel.add(showAmountFPN);
 
@@ -71,10 +72,8 @@ public class EditWindow {
 
 
 		//Configuration of ComboBoxes
-		String[] weights = {"-5","-4","-3","-2","-1","0","1","2","3","4","5"};
 		rulesComboBox.setModel(new DefaultComboBoxModel<>(rc.getConfiguration().keySet().toArray()));
-		weightsComboBox.setModel(new DefaultComboBoxModel<>(weights));
-		weightsComboBox.setSelectedItem(rc.getConfiguration().get(rulesComboBox.getSelectedItem()));
+		rulesWeights.setText(rc.getConfiguration().get(rulesComboBox.getSelectedItem()));
 
 		
 		
@@ -84,7 +83,7 @@ public class EditWindow {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				weightsComboBox.setSelectedItem(rc.getConfiguration().get(rulesComboBox.getSelectedItem()));
+				rulesWeights.setText(rc.getConfiguration().get(rulesComboBox.getSelectedItem()));
 
 			}
 		});
@@ -104,7 +103,7 @@ public class EditWindow {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				rc.getConfiguration().put(rulesComboBox.getSelectedItem().toString(), weightsComboBox.getSelectedItem().toString());
+				rc.getConfiguration().put(rulesComboBox.getSelectedItem().toString(), rulesWeights.getText().toString());
 				rc.writeConfig();
 				cw.calculateFPN();
 

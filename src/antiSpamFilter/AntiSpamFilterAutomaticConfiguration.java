@@ -26,7 +26,7 @@ public class AntiSpamFilterAutomaticConfiguration {
 	private static final int INDEPENDENT_RUNS = 5 ;
 
 	public AntiSpamFilterAutomaticConfiguration() {
-		
+		BoxplotGenerator();
 	}
 
 	public void BoxplotGenerator() {
@@ -63,7 +63,7 @@ public class AntiSpamFilterAutomaticConfiguration {
 			new GenerateLatexTablesWithStatistics(experiment).run() ;
 			new GenerateBoxplotsWithR<>(experiment).setRows(1).setColumns(1).run() ;
 
-			Runtime.getRuntime().exec("Rscript HV.Boxplot.R", null, new File("C:\\Users\\Adolfo\\git\\ES1-2017-LEI-PL-104\\experimentBaseDirectory\\AntiSpamStudy\\R"));
+			Runtime.getRuntime().exec("Rscript HV.Boxplot.R", null, new File("C:\\Users\\Adolfo\\git\\EexperimentBaseDirectory\\AntiSpamStudy\\R"));
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
