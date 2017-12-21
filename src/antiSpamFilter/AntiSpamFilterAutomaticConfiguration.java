@@ -12,6 +12,7 @@ import org.uma.jmetal.util.experiment.component.*;
 import org.uma.jmetal.util.experiment.util.ExperimentAlgorithm;
 import org.uma.jmetal.util.experiment.util.ExperimentProblem;
 
+import GUI.Gui;
 import Readers.LogReader;
 import Readers.ReadConfiguration;
 
@@ -24,41 +25,48 @@ import java.util.List;
 public class AntiSpamFilterAutomaticConfiguration {
 	private static final int INDEPENDENT_RUNS = 5 ;
 
-	public static void main(String[] args) throws IOException {
-		String experimentBaseDirectory = "experimentBaseDirectory";
-
-		List<ExperimentProblem<DoubleSolution>> problemList = new ArrayList<>();
-
-		AntiSpamFilterProblem ASFP = new AntiSpamFilterProblem(new ReadConfiguration("C:\\Users\\Adolfo\\git\\ES1-2017-LEI-PL-104\\resources\\rules.cf")
-				, new LogReader("C:\\Users\\Adolfo\\git\\ES1-2017-LEI-PL-104\\resources\\spam.log")
-				,new LogReader("C:\\Users\\Adolfo\\git\\ES1-2017-LEI-PL-104\\resources\\ham.log"));
-
-		problemList.add(new ExperimentProblem<>(ASFP));
-
-		List<ExperimentAlgorithm<DoubleSolution, List<DoubleSolution>>> algorithmList =
-				configureAlgorithmList(problemList);
-
-		Experiment<DoubleSolution, List<DoubleSolution>> experiment =
-				new ExperimentBuilder<DoubleSolution, List<DoubleSolution>>("AntiSpamStudy")
-				.setAlgorithmList(algorithmList)
-				.setProblemList(problemList)
-				.setExperimentBaseDirectory(experimentBaseDirectory)
-				.setOutputParetoFrontFileName("FUN")
-				.setOutputParetoSetFileName("VAR")
-				.setReferenceFrontDirectory(experimentBaseDirectory+"/referenceFronts")
-				.setIndicatorList(Arrays.asList(new PISAHypervolume<DoubleSolution>()))
-				.setIndependentRuns(INDEPENDENT_RUNS)
-				.setNumberOfCores(8)
-				.build();
-
-		new ExecuteAlgorithms<>(experiment).run();
-		new GenerateReferenceParetoSetAndFrontFromDoubleSolutions(experiment).run();
-		new ComputeQualityIndicators<>(experiment).run() ;
-		new GenerateLatexTablesWithStatistics(experiment).run() ;
-		new GenerateBoxplotsWithR<>(experiment).setRows(1).setColumns(1).run() ;
-
-		Runtime.getRuntime().exec("Rscript HV.Boxplot.R", null, new File("C:\\Users\\Adolfo\\git\\ES1-2017-LEI-PL-104\\experimentBaseDirectory\\AntiSpamStudy\\R"));
+	public AntiSpamFilterAutomaticConfiguration() {
 		
+	}
+
+	public void BoxplotGenerator() {
+		try {
+			String experimentBaseDirectory = "experimentBaseDirectory";
+
+			List<ExperimentProblem<DoubleSolution>> problemList = new ArrayList<>();
+
+			AntiSpamFilterProblem ASFP = new AntiSpamFilterProblem(new ReadConfiguration(Gui.getInstance().getRulesPath())
+					, new LogReader(Gui.getInstance().getSpamPath())
+					,new LogReader(Gui.getInstance().getHamPath()));
+
+			problemList.add(new ExperimentProblem<>(ASFP));
+
+			List<ExperimentAlgorithm<DoubleSolution, List<DoubleSolution>>> algorithmList =
+					configureAlgorithmList(problemList);
+
+			Experiment<DoubleSolution, List<DoubleSolution>> experiment =
+					new ExperimentBuilder<DoubleSolution, List<DoubleSolution>>("AntiSpamStudy")
+					.setAlgorithmList(algorithmList)
+					.setProblemList(problemList)
+					.setExperimentBaseDirectory(experimentBaseDirectory)
+					.setOutputParetoFrontFileName("FUN")
+					.setOutputParetoSetFileName("VAR")
+					.setReferenceFrontDirectory(experimentBaseDirectory+"/referenceFronts")
+					.setIndicatorList(Arrays.asList(new PISAHypervolume<DoubleSolution>()))
+					.setIndependentRuns(INDEPENDENT_RUNS)
+					.setNumberOfCores(8)
+					.build();
+
+			new ExecuteAlgorithms<>(experiment).run();
+			new GenerateReferenceParetoSetAndFrontFromDoubleSolutions(experiment).run();
+			new ComputeQualityIndicators<>(experiment).run() ;
+			new GenerateLatexTablesWithStatistics(experiment).run() ;
+			new GenerateBoxplotsWithR<>(experiment).setRows(1).setColumns(1).run() ;
+
+			Runtime.getRuntime().exec("Rscript HV.Boxplot.R", null, new File("C:\\Users\\Adolfo\\git\\ES1-2017-LEI-PL-104\\experimentBaseDirectory\\AntiSpamStudy\\R"));
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	static List<ExperimentAlgorithm<DoubleSolution, List<DoubleSolution>>> configureAlgorithmList(

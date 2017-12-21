@@ -24,8 +24,8 @@ public class AntiSpamFilesReader {
 			Scanner s = new Scanner(new File(fileRF));
 			while(s.hasNextLine()) {
 				String l = s.nextLine();
-				FP.add(Double.parseDouble(l.split(" ")[0]));
-				FN.add(Double.parseDouble(l.split(" ")[1]));
+				FN.add(Double.parseDouble(l.split(" ")[0]));
+				FP.add(Double.parseDouble(l.split(" ")[1]));
 			}
 			s.close();
 		} catch (FileNotFoundException e) {

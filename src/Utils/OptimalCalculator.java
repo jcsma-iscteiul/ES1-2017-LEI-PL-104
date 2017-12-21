@@ -16,6 +16,9 @@ public class OptimalCalculator {
 	public OptimalCalculator(ReadConfiguration rc, AntiSpamFilesReader asfr) {
 		this.rc = rc;
 		this.asfr = asfr;
+		calculateBestFset();
+		getRuleSet();
+		writeBestRules();
 	}
 
 	public int calculateBestFset() { //1º
