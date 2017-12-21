@@ -122,8 +122,8 @@ public class ConfigurationWindow {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new AntiSpamFilterAutomaticConfiguration();
-				AntiSpamFilesReader ASFR = new AntiSpamFilesReader("/ES1-2017/experimentBaseDirectory/referenceFronts/AntiSpamFilterProblem.rf",
-						"/ES1-2017/experimentBaseDirectory/referenceFronts/AntiSpamFilterProblem.rs");
+				AntiSpamFilesReader ASFR = new AntiSpamFilesReader("C:\\Users\\Adolfo\\git\\ES1-2017-LEI-PL-104\\experimentBaseDirectory\\referenceFronts\\AntiSpamFilterProblem.rf",
+						"C:\\Users\\Adolfo\\git\\ES1-2017-LEI-PL-104\\experimentBaseDirectory\\referenceFronts\\AntiSpamFilterProblem.rs");
 				new OptimalCalculator(rc,ASFR);
 				calculateFPN();
 				showFPN();

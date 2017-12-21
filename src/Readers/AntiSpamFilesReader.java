@@ -16,6 +16,9 @@ public class AntiSpamFilesReader {
 	public AntiSpamFilesReader(String fileRF, String fileRS) {
 		this.fileRF = fileRF;
 		this.fileRS = fileRS;
+		readRF();
+		readRS();
+		
 	}
 	
 	//Melhor FP e FN Combo (linha)

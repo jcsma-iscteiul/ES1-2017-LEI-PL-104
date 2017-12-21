@@ -63,7 +63,7 @@ public class AntiSpamFilterAutomaticConfiguration {
 			new GenerateLatexTablesWithStatistics(experiment).run() ;
 			new GenerateBoxplotsWithR<>(experiment).setRows(1).setColumns(1).run() ;
 
-			Runtime.getRuntime().exec("Rscript HV.Boxplot.R", null, new File("C:\\Users\\Adolfo\\git\\EexperimentBaseDirectory\\AntiSpamStudy\\R"));
+			Runtime.getRuntime().exec("Rscript HV.Boxplot.R", null, new File("experimentBaseDirectory\\AntiSpamStudy\\R"));
 		}catch(IOException e) {
 			e.printStackTrace();
 		}

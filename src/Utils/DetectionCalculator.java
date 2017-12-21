@@ -20,10 +20,10 @@ public class DetectionCalculator {
 	public int calculateFP() {
 		HashMap<String, String[]> msgHash = lrSPAM.getMsgRules();
 		int FP = 0;
-		int msgTotalWeight = 0;
+		double msgTotalWeight = 0;
 		for(String i : msgHash.keySet()) { //iterar as mensagens
 			for(int x = 0;x<msgHash.get(i).length;x++) { //iterar as regras das mensagens
-				msgTotalWeight = msgTotalWeight + Integer.parseInt((rc.getConfiguration().get(msgHash.get(i)[x])));
+				msgTotalWeight = msgTotalWeight + Double.parseDouble((rc.getConfiguration().get(msgHash.get(i)[x])));
 			}
 			if(msgTotalWeight<=5) {
 				FP++;
@@ -36,10 +36,10 @@ public class DetectionCalculator {
 	public int calculateFN() {
 		HashMap<String, String[]> msgHash = lrHAM.getMsgRules();
 		int FN = 0;
-		int msgTotalWeight = 0;
+		double msgTotalWeight = 0;
 		for(String i : msgHash.keySet()) { //iterar as mensagens
 			for(int x = 0;x<msgHash.get(i).length;x++) { //iterar as regras das mensagens
-				msgTotalWeight = msgTotalWeight + Integer.parseInt((rc.getConfiguration().get(msgHash.get(i)[x])));
+				msgTotalWeight = msgTotalWeight + Double.parseDouble((rc.getConfiguration().get(msgHash.get(i)[x])));
 			}
 			if(msgTotalWeight>5) {
 				FN++;
