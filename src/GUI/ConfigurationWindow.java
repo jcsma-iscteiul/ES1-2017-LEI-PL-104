@@ -3,6 +3,8 @@ package GUI;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -122,8 +124,9 @@ public class ConfigurationWindow {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new AntiSpamFilterAutomaticConfiguration();
-				AntiSpamFilesReader ASFR = new AntiSpamFilesReader("C:\\Users\\Adolfo\\git\\ES1-2017-LEI-PL-104\\experimentBaseDirectory\\referenceFronts\\AntiSpamFilterProblem.rf",
-						"C:\\Users\\Adolfo\\git\\ES1-2017-LEI-PL-104\\experimentBaseDirectory\\referenceFronts\\AntiSpamFilterProblem.rs");
+				File RF = new File("experimentBaseDirectory\\referenceFronts\\AntiSpamFilterProblem.rf");
+				File RS = new File("experimentBaseDirectory\\referenceFronts\\AntiSpamFilterProblem.rs");
+				AntiSpamFilesReader ASFR = new AntiSpamFilesReader(RF.getAbsolutePath(),RS.getAbsolutePath());
 				new OptimalCalculator(rc,ASFR);
 				calculateFPN();
 				showFPN();
