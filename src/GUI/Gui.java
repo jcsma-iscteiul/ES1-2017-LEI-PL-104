@@ -39,7 +39,6 @@ public class Gui implements Runnable {
 	/***
 	 * private constructor. Don't let anyone else instantiate this class.
 	 * 
-	 * @author rccms-iscteiul
 	 * 
 	 */
 	private Gui () {
@@ -201,6 +200,7 @@ public class Gui implements Runnable {
 
 	/***
 	 * returns the value of rulesPath
+	 * 
 	 * @return rulesPath
 	 */
 	public String getRulesPath() {
@@ -209,6 +209,7 @@ public class Gui implements Runnable {
 
 	/***
 	 * returns the value of spamPath
+	 * 
 	 * @return spamPath
 	 */
 	public String getSpamPath() {
@@ -217,6 +218,7 @@ public class Gui implements Runnable {
 
 	/***
 	 * returns the value of hamPath
+	 * 
 	 * @return hamPath
 	 */
 	public String getHamPath() {
@@ -235,6 +237,11 @@ public class Gui implements Runnable {
 		this.rulesPath=rulesPath;
 	}
 
+	/***
+	 * Used exclusively for JUNit testing
+	 * 
+	 * @return buttons
+	 */
 	public JButton[] getButtonsForTesting(){
 		JButton[] buttons = {this.cfButton, this.log1Button, this.log2Button, this.next};
 		return buttons;
@@ -242,15 +249,16 @@ public class Gui implements Runnable {
 
 
 
-public static void main(String[] args) {
-	Gui.getInstance();
-}
+	public static void main(String[] args) {
+		Gui.getInstance();
+	}
 
 
-@Override
-public void run() {
-	// TODO Auto-generated method stub
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
 
-}
+	}
+
 
 }

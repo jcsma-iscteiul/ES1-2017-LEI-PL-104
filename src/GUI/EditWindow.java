@@ -28,19 +28,23 @@ public class EditWindow {
 	private ConfigurationWindow cw;
 
 	/***
-	 * This constructor builds a new Edit Window. This window will allow you to change things in the file rules.cf.
+	 * This class builds a new Edit Window. This window will allow you to change things in the file rules.cf.
 	 * You can change the weights of the rules that you want. 
 	 * 
-	 * @author rccms-iscteiul
+	 * @param rc ReadConfiguration
+	 * @param cw ConfigurationWindow
+	 * 
 	 */
 	public EditWindow(ReadConfiguration rc, ConfigurationWindow cw) {
 		this.rc = rc;
 		this.cw = cw;
 		build();
 	}
-	
+
 	/***
-	 * This method builds a frame with 2 JComboBox (one for the rules and one for the weights) and one Apply button. 
+	 * This method builds a frame with one JComboBox (for the rules) and one JTextField (for the weights),
+	 * one Apply Button that writes the new weight in the file rules.cf and one button to show False Positives and False Negatives
+	 *  
 	 */
 	private void build() {
 
@@ -53,7 +57,7 @@ public class EditWindow {
 		applyButton = new JButton("Apply");
 		showAmountFPN = new JButton("Show FP and FP");
 
-		//comboBoxes
+		//comboBox and JTextField
 		rulesComboBox = new JComboBox<>();
 		rulesWeights = new JTextField();
 
@@ -71,25 +75,26 @@ public class EditWindow {
 		frame.add(mainPanel);
 
 
-		//Configuration of ComboBoxes
+		//Configuration of ComboBox and JTextField
 		rulesComboBox.setModel(new DefaultComboBoxModel<>(rc.getConfiguration().keySet().toArray()));
 		rulesWeights.setText(rc.getConfiguration().get(rulesComboBox.getSelectedItem()));
 
-		
-		
+
+
 		//Action Listeners	
+
 		rulesComboBox.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				
+
 				rulesWeights.setText(rc.getConfiguration().get(rulesComboBox.getSelectedItem()));
 
 			}
 		});
 
-
+		//Show False Positives and False Negatives
 		showAmountFPN.addActionListener(new ActionListener() {
 
 			@Override
@@ -98,7 +103,7 @@ public class EditWindow {
 			}
 		});
 
-
+		//Apply the new configuration
 		applyButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -114,7 +119,7 @@ public class EditWindow {
 				else {
 					JOptionPane.showMessageDialog(null, "Invalid weight, insert between -5 and 5!");
 				}
-				
+
 
 			}
 		});

@@ -13,16 +13,24 @@ public class ReadConfiguration {
 	private HashMap<String, String> rulesWeight;
 	private boolean read = true;
 
+
+
+	/***
+	 * Class used to read rules.cf and use the content.
+	 * 
+	 * @param path path to the file that you want to read
+	 */
 	public ReadConfiguration(String path) {
 		this.path = path;
 		readFile(path);
 	}
-	
-	//Temp
-	public HashMap<String, String> getRulesWeight() {
-		return rulesWeight;
-	}
 
+	/***
+	 * Open the cf file and saves the content to a HashMap<String, String> using the rule as key to get the weight.
+	 * 
+	 * @param path path to the file that you want to read
+	 * 
+	 */
 	private void readFile(String path) {
 		Scanner s;
 		rulesWeight = new HashMap<String, String>();
@@ -42,20 +50,39 @@ public class ReadConfiguration {
 		}
 	}
 
+
+
+	/***
+	 * Getter than returns the HashMap<String, String> rulesWeight
+	 * 
+	 * @return rulesWeight
+	 */
 	public HashMap<String, String> getConfiguration() {
 		return rulesWeight;
 	}
 
+
+	/***
+	 * 
+	 * Generate a random number between two given numbers
+	 * 
+	 * @param min 
+	 * @param max
+	 * @return random number
+	 */
 	private int generateRandom(int min, int max) {
 		Random random = new Random();
 		return random.nextInt((max-min)+1)-5;
 	}
+
 
 	private void generateRandomConfig() {
 		for(String i : rulesWeight.keySet()) {
 			rulesWeight.put(i, String.valueOf(generateRandom(-5,5)));
 		}
 	}
+
+
 
 	public void applyRandomConfig() {
 		generateRandomConfig();
@@ -71,7 +98,7 @@ public class ReadConfiguration {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void writeConfig() {
 		PrintWriter writer;
 		try {
@@ -85,7 +112,7 @@ public class ReadConfiguration {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public boolean getWasTherePreviousConfig() {
 		return read;
 	}

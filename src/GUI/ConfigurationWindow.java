@@ -32,9 +32,8 @@ public class ConfigurationWindow {
 
 
 	/***
-	 * Builds a configuration window.
+	 * Builds a configuration window 
 	 * 
-	 * @author rccms-iscteiul
 	 */
 
 	public ConfigurationWindow() {
@@ -75,13 +74,12 @@ public class ConfigurationWindow {
 		lr2 = new LogReader(hamPath);
 		rc = new ReadConfiguration(rulesPath);
 
-		
-		
-		
+
+
+
 		// Action Listeners
-		
-		// Generate Random Configuration Button
-		//This is what happens when you press the GRC Button
+
+		// Generate Random Configuration and show False Positives and False Negatives for that configuration
 		GRC.addActionListener(new ActionListener() {
 
 			@Override
@@ -93,7 +91,7 @@ public class ConfigurationWindow {
 			}
 		});
 
-		
+
 		//This button will open a new window
 		//Edit the file rules.cf
 		//Here you can choose the rule that you want and change the weight of that rule
@@ -118,10 +116,10 @@ public class ConfigurationWindow {
 				showFPN();
 			}
 		});
-		
-		
+
+		// Generate Optimal Configuration and show False Positives and False Negatives for that configuration
 		GOC.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new AntiSpamFilterAutomaticConfiguration();
@@ -131,34 +129,51 @@ public class ConfigurationWindow {
 				OptimalCalculator o = new OptimalCalculator(rc,ASFR);
 				calculateOFPN(o);
 				showFPN();
-				
+
 			}
 		});
 
 
 	}
 
-	
+	/***
+	 * Show False Positives and False Negatives
+	 * 
+	 */
 	public void showFPN() {
 		if(rc.getWasTherePreviousConfig()) {
 			JOptionPane.showMessageDialog(null, "False positives found: "+FP+", False negatives found: "+FN);
 		}else {
 			JOptionPane.showMessageDialog(null, "Generate something first");
 		} 
-		
+
 	}
-	
+
+
+	/***
+	 *
+	 * Calculate False Positives and False Negatives to the given OptimalCalculator and put the values in FP and FN attributes 
+	 * 
+	 * @param oc OptimalCalculator
+	 */
 	public void calculateOFPN(OptimalCalculator oc) {
 		FP = (int) oc.getFP();
 		FN = (int) oc.getFN();
 	}
 
+
+	/***
+	 *
+	 * Read the files spam.log and ham.log and calculate False Positives and False Negatives for that configuration
+	 *  
+	 * @param oc OptimalCalculator
+	 */
 	public void calculateFPN () {
 		DetectionCalculator dc = new DetectionCalculator(rc, lr1, lr2);
 		FP = dc.calculateFP();
 		FN = dc.calculateFN();
 	}
-	
+
 
 }
 

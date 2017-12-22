@@ -12,11 +12,9 @@ public class LogReader {
 	private String path;
 
 	/***
-	 * Classed used to parse the log files and use the content.
+	 * Class used to parse the log files and use the content.
 	 * 
-	 * @author atgmo-iscteiul
-	 * 
-	 * @param path
+	 * @param path path to the file that you want to read
 	 */
 	public LogReader(String path) {
 		this.path = path;
@@ -46,13 +44,26 @@ public class LogReader {
 			addContent(id, rules);
 		}
 	}
-	
+
+
+	/***
+	 * Getter than returns the HashMap<String, String[]> msgRules
+	 * 
+	 * @return msgRules
+	 */
 	public HashMap<String, String[]> getMsgRules() {
 		return msgRules;
 	}
-	
+
+
+	/***
+	 * Add content to the HashMap<String, String[]> msgRules
+	 * 	 
+	 * @param a email ID
+	 * @param b rules of the email
+	 */
 	public void addContent(String a, String[] b) {
 		msgRules.put(a, b);
 	}
-	
+
 }
