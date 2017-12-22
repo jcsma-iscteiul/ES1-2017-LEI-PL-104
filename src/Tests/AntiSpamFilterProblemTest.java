@@ -13,7 +13,7 @@ public class AntiSpamFilterProblemTest {
 		ReadConfiguration rc = new ReadConfiguration(new File("resources\\rules.cf").getAbsolutePath());
 		LogReader ls = new LogReader(new File("resources\\spam.log").getAbsolutePath());
 		LogReader lh = new LogReader(new File("resources\\ham.log").getAbsolutePath());
-		AntiSpamFilterProblem ASFP = new AntiSpamFilterProblem(rc, ls, lh);
+		new AntiSpamFilterProblem(rc, ls, lh);
 		
 		
 	}

@@ -7,7 +7,7 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -43,6 +43,7 @@ public class Gui implements Runnable {
 	 * 
 	 */
 	private Gui () {
+		setPathsManuallyForTest(new File("resources\\ham.log").getAbsolutePath(), new File("resources\\spam.log").getAbsolutePath(), new File("resources\\rules.cf").getAbsolutePath());
 		pathWindow();
 	}
 

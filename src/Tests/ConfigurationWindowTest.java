@@ -1,14 +1,9 @@
 package Tests;
 
-import java.awt.AWTException;
-import java.awt.Robot;
 import java.io.File;
 import org.junit.Test;
-import GUI.ConfigurationWindow;
 import Readers.AntiSpamFilesReader;
-import Readers.LogReader;
 import Readers.ReadConfiguration;
-import Utils.DetectionCalculator;
 import Utils.OptimalCalculator;
 
 public class ConfigurationWindowTest {
@@ -23,12 +18,7 @@ public class ConfigurationWindowTest {
 				new File("experimentBaseDirectory\\referenceFronts\\AntiSpamFilterProblem.rf").getAbsolutePath(),
 				new File("experimentBaseDirectory\\referenceFronts\\AntiSpamFilterProblem.rs").getAbsolutePath());
 
-		OptimalCalculator oc = new OptimalCalculator(rc,asfr);
-	
-	
-		ConfigurationWindow cw = new ConfigurationWindow();
-
-	
+		new OptimalCalculator(rc,asfr);
 		
 		
 	}
