@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ClassDiagram>
+    <Class name="GUI.FileChooser" x="692" y="246">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="Utils.DetectionCalculator" x="45" y="348">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association destinationClassName="Readers.ReadConfiguration"
+            endpointName="rc" kind="Simple"/>
+        <Association destinationClassName="Readers.LogReader"
+            endpointName="lrSPAM" kind="Simple"/>
+        <Association destinationClassName="Readers.LogReader"
+            endpointName="lrHAM" kind="Simple"/>
+        <Communication destinationClassName="Readers.LogReader"/>
+    </Class>
+    <Class name="Readers.ReadConfiguration" x="409" y="244">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="GUI.EditWindow" x="791" y="415">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association destinationClassName="Readers.ReadConfiguration"
+            endpointName="rc" kind="Simple"/>
+        <Association destinationClassName="GUI.ConfigurationWindow"
+            endpointName="cw" kind="Simple"/>
+        <Communication destinationClassName="GUI.Gui"/>
+    </Class>
+    <Class name="antiSpamFilter.AntiSpamFilterAutomaticConfiguration"
+        x="339" y="45">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Communication destinationClassName="GUI.Gui"/>
+    </Class>
+    <Class name="antiSpamFilter.AntiSpamFilterProblem" x="90" y="39">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association destinationClassName="Readers.ReadConfiguration"
+            endpointName="rc" kind="Simple"/>
+        <Association destinationClassName="Readers.LogReader"
+            endpointName="lrSPAM" kind="Simple"/>
+        <Association destinationClassName="Readers.LogReader"
+            endpointName="lrHAM" kind="Simple"/>
+        <Communication destinationClassName="Readers.LogReader"/>
+    </Class>
+    <Class name="GUI.Gui" x="649" y="381">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="Utils.OptimalCalculator" x="45" y="184">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association destinationClassName="Readers.ReadConfiguration"
+            endpointName="rc" kind="Simple"/>
+        <Association destinationClassName="Readers.AntiSpamFilesReader"
+            endpointName="asfr" kind="Simple"/>
+        <Communication destinationClassName="Readers.ReadConfiguration"/>
+        <Communication destinationClassName="Readers.AntiSpamFilesReader"/>
+    </Class>
+    <Class name="GUI.ConfigurationWindow" x="726" y="21">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association destinationClassName="Readers.ReadConfiguration"
+            endpointName="rc" kind="Simple"/>
+        <Association destinationClassName="GUI.ConfigurationWindow"
+            endpointName="cw" kind="Simple"/>
+        <Association destinationClassName="Readers.LogReader"
+            endpointName="lr1" kind="Simple"/>
+        <Association destinationClassName="Readers.LogReader"
+            endpointName="lr2" kind="Simple"/>
+        <Communication destinationClassName="Utils.DetectionCalculator"/>
+        <Communication destinationClassName="Readers.ReadConfiguration"/>
+        <Communication destinationClassName="GUI.Gui"/>
+        <Communication destinationClassName="Utils.OptimalCalculator"/>
+    </Class>
+    <Class name="Readers.AntiSpamFilesReader" x="213" y="441">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="Readers.LogReader" x="446" y="121">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+</ClassDiagram>
