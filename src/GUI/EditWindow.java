@@ -40,8 +40,7 @@ public class EditWindow {
 		this.cw = cw;
 		build();
 	}
-
-
+	
 	/***
 	 * This method builds a frame with 2 JComboBox (one for the rules and one for the weights) and one Apply button. 
 	 */
@@ -98,7 +97,6 @@ public class EditWindow {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				cw.showFPN();
-
 			}
 		});
 
@@ -110,6 +108,7 @@ public class EditWindow {
 				String peso = "";
 				if(Double.parseDouble(rulesWeights.getText().toString())<=5 && Double.parseDouble(rulesWeights.getText().toString())>=-5) {
 					peso = rulesWeights.getText().toString();
+					System.out.println("PESO: "+peso);
 					rc.getConfiguration().put(rulesComboBox.getSelectedItem().toString(), peso);
 					rc.writeConfig();
 					cw.calculateFPN();

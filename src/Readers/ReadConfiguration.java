@@ -17,6 +17,11 @@ public class ReadConfiguration {
 		this.path = path;
 		readFile(path);
 	}
+	
+	//Temp
+	public HashMap<String, String> getRulesWeight() {
+		return rulesWeight;
+	}
 
 	private void readFile(String path) {
 		Scanner s;

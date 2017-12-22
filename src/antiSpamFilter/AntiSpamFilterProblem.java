@@ -1,5 +1,6 @@
 package antiSpamFilter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -40,7 +41,6 @@ public class AntiSpamFilterProblem extends AbstractDoubleProblem {
 		int FP = 0;
 		int FN = 0;
 		double[] nSolution = new double[solution.getNumberOfVariables()];
-		
 		for(int x = 0;x< solution.getNumberOfVariables();x++) {
 			nSolution[x] = solution.getVariableValue(x);
 		}

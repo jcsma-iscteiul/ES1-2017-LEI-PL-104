@@ -7,6 +7,8 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -51,6 +53,8 @@ public class Gui implements Runnable {
 	public static Gui getInstance() {
 		return Gui.INSTANCE;
 	}
+
+
 
 
 	/***
@@ -157,7 +161,6 @@ public class Gui implements Runnable {
 			}
 		});
 
-
 		next.addActionListener(new ActionListener() {
 
 			@Override
@@ -180,7 +183,6 @@ public class Gui implements Runnable {
 
 		frame.setVisible(true);
 	}
-
 
 	/***
 	 * Puts the JFrame in the middle of the screen
@@ -220,17 +222,34 @@ public class Gui implements Runnable {
 		return hamPath;
 	}
 
+	/***
+	 * Used exclusively for JUNit testing
+	 * @param hamPath
+	 * @param spamPath
+	 * @param rulesPath
+	 */
+	public void setPathsManuallyForTest(String hamPath, String spamPath, String rulesPath){
+		this.hamPath=hamPath;
+		this.spamPath=spamPath;
+		this.rulesPath=rulesPath;
+	}
 
-
-	public static void main(String[] args) {
-		Gui.getInstance();
+	public JButton[] getButtonsForTesting(){
+		JButton[] buttons = {this.cfButton, this.log1Button, this.log2Button, this.next};
+		return buttons;
 	}
 
 
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		
-	}
+
+public static void main(String[] args) {
+	Gui.getInstance();
+}
+
+
+@Override
+public void run() {
+	// TODO Auto-generated method stub
+
+}
 
 }
