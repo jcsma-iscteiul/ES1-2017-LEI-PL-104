@@ -52,7 +52,7 @@ public class AntiSpamFilterProblem extends AbstractDoubleProblem {
 			for(int x = 0;x<msgHash.get(i).length;x++) { //iterar as regras das mensagens
 				msgTotalWeight += nSolution[x];
 			}
-			if(msgTotalWeight<=5) {
+			if(msgTotalWeight<5) {
 				FP++;
 			}
 		}
@@ -69,9 +69,6 @@ public class AntiSpamFilterProblem extends AbstractDoubleProblem {
 			}
 		}
 		
-		System.out.println(FN);
-		System.out.println(FP);
-
 		solution.setObjective(0, FN);
 		solution.setObjective(1, FP);
 	}

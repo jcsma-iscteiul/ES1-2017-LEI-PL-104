@@ -127,8 +127,8 @@ public class ConfigurationWindow {
 				File RF = new File("experimentBaseDirectory\\referenceFronts\\AntiSpamFilterProblem.rf");
 				File RS = new File("experimentBaseDirectory\\referenceFronts\\AntiSpamFilterProblem.rs");
 				AntiSpamFilesReader ASFR = new AntiSpamFilesReader(RF.getAbsolutePath(),RS.getAbsolutePath());
-				new OptimalCalculator(rc,ASFR);
-				calculateFPN();
+				OptimalCalculator o = new OptimalCalculator(rc,ASFR);
+				calculateOFPN(o);
 				showFPN();
 				
 			}
@@ -145,6 +145,11 @@ public class ConfigurationWindow {
 			JOptionPane.showMessageDialog(null, "Generate something first");
 		} 
 		
+	}
+	
+	public void calculateOFPN(OptimalCalculator oc) {
+		FP = (int) oc.getFP();
+		FN = (int) oc.getFN();
 	}
 
 	public void calculateFPN () {

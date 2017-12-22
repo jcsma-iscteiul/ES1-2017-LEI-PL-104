@@ -23,7 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class AntiSpamFilterAutomaticConfiguration {
-	private static final int INDEPENDENT_RUNS = 200 ;
+	private static final int INDEPENDENT_RUNS = 5 ;
 
 	public AntiSpamFilterAutomaticConfiguration() {
 		BoxplotGenerator();
@@ -79,7 +79,7 @@ public class AntiSpamFilterAutomaticConfiguration {
 					new SBXCrossover(1.0, 5),
 					new PolynomialMutation(1.0 / problemList.get(i).getProblem().getNumberOfVariables(), 10.0))
 					.setMaxEvaluations(500)
-					.setPopulationSize(100)
+					.setPopulationSize(250)
 					.build();
 			algorithms.add(new ExperimentAlgorithm<>(algorithm, "NSGAII", problemList.get(i).getTag()));
 		}

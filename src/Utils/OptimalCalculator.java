@@ -12,6 +12,8 @@ public class OptimalCalculator {
 	private AntiSpamFilesReader asfr;
 	private String ruleSet;
 	private int BestFset;
+	private double FP;
+	private double FN;
 
 	public OptimalCalculator(ReadConfiguration rc, AntiSpamFilesReader asfr) {
 		this.rc = rc;
@@ -26,9 +28,15 @@ public class OptimalCalculator {
 		ArrayList<Double> FN = asfr.getFN();
 		ArrayList<Double> bestSet = new ArrayList<Double>();
 		for(int x = 0;x < FP.size();x++) {
-			bestSet.add(Math.sqrt(Math.pow(FP.get(x), 2)+ Math.pow(FN.get(x), 2)));
+			double b = Math.sqrt(Math.pow(FP.get(x), 2)+ Math.pow(FN.get(x), 2));
+			bestSet.add(b);
 		}
 		BestFset = bestSet.indexOf(Collections.min(bestSet));
+		System.out.println(FP);
+		System.out.println(FN);
+		System.out.println(BestFset);
+		this.FP = FP.get(BestFset);
+		this.FN = FN.get(BestFset); 
 		return BestFset;
 	}
 
@@ -46,5 +54,13 @@ public class OptimalCalculator {
 		}
 		rc.writeConfig();
 	}
-
+	
+	public double getFN() {
+		return FN;
+	}
+	
+	public double getFP() {
+		return FP;
+	}
+	
 }
