@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,6 +10,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -48,10 +50,11 @@ public class EditWindow {
 		frame = new JFrame("Change rules.cf");
 		Gui.getInstance().center(frame);
 		frame.setSize(380, 80);
+		frame.setResizable(false);
 
 		//buttons
 		applyButton = new JButton("Apply");
-		showAmountFPN = new JButton("Show FP and FP for this new configuration");
+		showAmountFPN = new JButton("Show FP and FP");
 
 		//comboBoxes
 		rulesComboBox = new JComboBox<>();
@@ -59,12 +62,12 @@ public class EditWindow {
 
 		//panels
 		mainPanel = new JPanel(new GridLayout(2, 1));
-		rulesAndWeightsPanel = new JPanel(new BorderLayout());
+		rulesAndWeightsPanel = new JPanel(new GridLayout(1, 2));
 		buttonsPanel = new JPanel(new GridLayout(1, 2));
 		mainPanel.add(rulesAndWeightsPanel);
 		mainPanel.add(buttonsPanel);
-		rulesAndWeightsPanel.add(rulesComboBox,BorderLayout.CENTER);
-		rulesAndWeightsPanel.add(rulesWeights,BorderLayout.EAST);
+		rulesAndWeightsPanel.add(rulesComboBox);
+		rulesAndWeightsPanel.add(rulesWeights);
 		buttonsPanel.add(applyButton);
 		buttonsPanel.add(showAmountFPN);
 
@@ -83,6 +86,7 @@ public class EditWindow {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
+				
 				rulesWeights.setText(rc.getConfiguration().get(rulesComboBox.getSelectedItem()));
 
 			}
@@ -103,9 +107,17 @@ public class EditWindow {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				rc.getConfiguration().put(rulesComboBox.getSelectedItem().toString(), rulesWeights.getText().toString());
-				rc.writeConfig();
-				cw.calculateFPN();
+				String peso = "";
+				if(Double.parseDouble(rulesWeights.getText().toString())<=5 && Double.parseDouble(rulesWeights.getText().toString())>=-5) {
+					peso = rulesWeights.getText().toString();
+					rc.getConfiguration().put(rulesComboBox.getSelectedItem().toString(), peso);
+					rc.writeConfig();
+					cw.calculateFPN();
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Invalid weight, insert between -5 and 5!");
+				}
+				
 
 			}
 		});

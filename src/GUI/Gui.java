@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class Gui {
+public class Gui implements Runnable {
 
 
 	private JFrame frame;
@@ -60,6 +60,7 @@ public class Gui {
 		frame = new JFrame("Anti-spam Filtering Configuration");
 		frame.setLayout(new GridLayout(5, 1));
 		frame.setSize(400,150);
+		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		center(frame);
 
@@ -223,6 +224,13 @@ public class Gui {
 
 	public static void main(String[] args) {
 		Gui.getInstance();
+	}
+
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

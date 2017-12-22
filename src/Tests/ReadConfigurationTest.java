@@ -20,15 +20,6 @@ public class ReadConfigurationTest {
 	@Test
 	public final void testGetConfiguration() {
 		HashMap<String,String> map = new HashMap<String,String>();
-//		Scanner s = new Scanner("resources/rules.cf");
-//		while(s.hasNextLine()) {
-//			String l = s.nextLine();
-//			if(l.split(" ").length != 1) {
-//				map.put(l.split(" ")[0], l.split(" ")[1]);
-//			}else {
-//				map.put(l, "");
-//			}
-//		}
 		assertEquals("Configuration not equals",rc.getConfiguration(),map);
 	}
 

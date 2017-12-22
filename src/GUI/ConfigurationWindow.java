@@ -57,6 +57,7 @@ public class ConfigurationWindow {
 		window.setSize(400, 125);
 		Gui.getInstance().center(window);
 		window.setLayout(new GridLayout(4, 1));
+		window.setResizable(false);
 		GRC = new JButton("Generate Random Configuration");
 		EDIT = new JButton("Edit rules.cf");
 		FPN = new JButton("Calculate FP e FN");

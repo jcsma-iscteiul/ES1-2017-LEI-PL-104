@@ -21,7 +21,8 @@ public class FileChooser {
 	 * @param b - file extension (ex: txt)
 	 * 
 	 */
-
+	JFileChooser fc = new JFileChooser();
+	
 	public FileChooser(String a, String b) {
 		this.a = a;
 		this.b=b;
@@ -36,7 +37,6 @@ public class FileChooser {
 	 */
 	public String buildFileChooser() {
 
-		JFileChooser fc = new JFileChooser();
 		fc.setFileFilter(new FileNameExtensionFilter(a, b));
 		fc.setCurrentDirectory(new File("resources"));
 		int result = fc.showOpenDialog(null);
@@ -46,7 +46,8 @@ public class FileChooser {
 			cf = "cancel";
 		}
 		return cf;
-
 	}
+	
+	
 
 }
