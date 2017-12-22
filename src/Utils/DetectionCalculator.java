@@ -5,18 +5,30 @@ import java.util.HashMap;
 import Readers.LogReader;
 import Readers.ReadConfiguration;
 
+/**
+ * Calculator for FN and FP values based on rules.cf file and the spam and ham log files
+ */
 public class DetectionCalculator {
 
 	private ReadConfiguration rc;
 	private LogReader lrSPAM;
 	private LogReader lrHAM;
 
+	/**
+	 * 
+	 * @param rc Configuration read from file
+	 * @param lrSPAM SPAM reader
+	 * @param lrHAM HAM reader
+	 */
 	public DetectionCalculator(ReadConfiguration rc, LogReader lrSPAM, LogReader lrHAM) {
 		this.rc = rc;
 		this.lrSPAM = lrSPAM;
 		this.lrHAM = lrHAM;
 	}
 
+	/**
+	 * @return FP value calculated with the rules weight and the spam.log values
+	 */
 	public int calculateFP() {
 		HashMap<String, String[]> msgHash = lrSPAM.getMsgRules();
 		int FP = 0;
@@ -33,6 +45,9 @@ public class DetectionCalculator {
 		return FP;
 	}
 
+	/**
+	 * @return FN value calculated with the rules weight and the ham.log values
+	 */
 	public int calculateFN() {
 		HashMap<String, String[]> msgHash = lrHAM.getMsgRules();
 		int FN = 0;
