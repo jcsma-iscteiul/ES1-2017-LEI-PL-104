@@ -1,3 +1,5 @@
+Sprint 25/11/2017 - 10/12/2017
+
 Em retrospetiva, o sprint correu deveras bem, a Validação e Verificação do Software foi, apesar de tudo, adiada porque as horas disponíveis dos programadores foi sobrestimada.
 
 A interface gráfica precisa apenas de pequenos ajustes para cumprir os requesitos do cliente, o Change Random Config e o Random Config estão completos.
@@ -10,3 +12,9 @@ Permite ao utilizador gerar uma configuração aleatória, por exemplo um vetor de 
 
 Change Random Config:
 Permite ao utilizador editar/mudar uma configuração gerada automáticamente e atualizar o montante resultande de Falsos Positivos e de Falsos Negativos para essa nova configuração.
+
+(Último) Sprint 11/12/2017 - 22/12/2017
+
+O sprint correu bem, para o tempo limitado e considerando a sobreposição de projetos esta semana. O software está completamente funcional, e pronto para entrega. As funcionalidades pedidas pelo cliente estão todas implementadas conforme possível de observar no vídeo de amostra do programa.
+
+As estimativas de tempo para cada item do Sprint Backlog estavam corretas aparte da Validação e Verificação do software, que demorou 10 horas, das 4 previstas. De um modo geral estamos satisfeitos com o trabalho desenvolvido, em termos de funcionalidade, sem nada a acrescentar, apenas a documentação poderia estar mais elaborada.
